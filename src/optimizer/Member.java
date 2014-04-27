@@ -71,11 +71,6 @@ public class Member {
         
     }
     
-    
-    public void ensurePositive(){
-        
-    }
-    
     //setter getter methods for the class.
     
     public int getGeneLength() {
