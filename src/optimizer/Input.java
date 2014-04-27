@@ -18,6 +18,7 @@ import java.util.ArrayList;
  */
 public class Input {
 
+
     String profit;
     ArrayList<Constraints> constraints = new ArrayList<Constraints>();
     String profitCalPath;
@@ -26,6 +27,8 @@ public class Input {
     InputStream stderr = null;
     InputStream stdout = null;
 
+    int numberOfVariables = 0;
+    static String profit = "5+7";
     //remove later
     public static void main(String args[]) throws IOException {
         //genProfitCalc();
@@ -197,4 +200,30 @@ public class Input {
         stdout = process.getInputStream();
         
     }
+    
+    public void calcNoOfVariables(){
+        
+    }
+    
+    public int getNoOfVariables(){
+        return this.numberOfVariables;
+    }
+
+    public String getProfitCalPath() {
+        return profitCalPath;
+    }
+
+    public void setProfitCalPath(String profitCalPath) {
+        this.profitCalPath = profitCalPath;
+    }
+
+    public String getConstCalPath() {
+        return constCalPath;
+    }
+
+    public void setConstCalPath(String constCalPath) {
+        this.constCalPath = constCalPath;
+    }
+    
+    
 }

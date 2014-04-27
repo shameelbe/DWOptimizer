@@ -10,7 +10,7 @@ import java.util.Random;
  *
  * @author Adix
  */
-public class Member {
+public class Member implements Comparable<Member>{
     private int geneLength;
     String genes;
     private double fitness;
@@ -22,6 +22,7 @@ public class Member {
      */
     Member(int geneLength){
         this.geneLength = geneLength;
+        this.decimalValue = new int[this.geneLength/4];
         this.genes = createRandomString();
     }
     
@@ -54,14 +55,13 @@ public class Member {
      * Computes the decimal values for the genes
      */
     private void computeDecimalValue(){
-          int decNo = this.geneLength/16;
-         int[] tempDecimal = new int[decNo];
-          for(int i = 0; i < decNo; i++){
+        int decNo = this.geneLength/16;         
+        for(int i = 0; i < decNo; i++){
               String sub = genes.substring(i*16, (i+1)*16);
               System.out.println(sub);
               System.out.println(Integer.parseInt(sub, 2));
-              tempDecimal[i] = Integer.parseInt(sub, 2);
-          }
+              decimalValue[i] = Integer.parseInt(sub, 2);
+          }        
     } 
     
     /**
@@ -70,10 +70,12 @@ public class Member {
     public void calculateFitness(){
         
     }
-    
-    
-    public void ensurePositive(){
         
+    public int compareTo(Member o) {
+        if (this.fitness > o.fitness){
+            return 1;
+        }
+        else return 0;
     }
     
     //setter getter methods for the class.
@@ -109,15 +111,15 @@ public class Member {
     public void setDecimalValue(int[] decimalValue) {
         this.decimalValue = decimalValue;
     }
-    
-    
- /** 
+
+    /**   
     public static void main(String[] args){
-        Member m = new Member(32);
+        Member m = new Member(64);
         System.out.println(m.genes);
         m.computeDecimalValue();
-        System.out.println(m.decimalValue[1]);
+        for(int i = 0; i < 4; i++){
+            System.out.println(m.decimalValue[i]);
+        } 
     }
-**/ 
- 
+    **/
 }
