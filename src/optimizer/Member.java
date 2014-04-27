@@ -10,7 +10,7 @@ import java.util.Random;
  *
  * @author Adix
  */
-public class Member {
+public class Member implements Comparable<Member>{
     private int geneLength;
     String genes;
     private double fitness;
@@ -37,7 +37,7 @@ public class Member {
         
     }
     
-    public String createRandomString(){
+    private String createRandomString(){
         Random r = new Random();
         String tempGene = "0";
         for(int i = 0; i < this.geneLength - 1; i++){
@@ -69,6 +69,13 @@ public class Member {
      */
     public void calculateFitness(){
         
+    }
+        
+    public int compareTo(Member o) {
+        if (this.fitness > o.fitness){
+            return 1;
+        }
+        else return 0;
     }
     
     //setter getter methods for the class.
@@ -104,7 +111,7 @@ public class Member {
     public void setDecimalValue(int[] decimalValue) {
         this.decimalValue = decimalValue;
     }
-    
+
     /**   
     public static void main(String[] args){
         Member m = new Member(64);

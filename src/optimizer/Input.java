@@ -16,6 +16,7 @@ import java.util.ArrayList;
  */
 public class Input {
 
+    int numberOfVariables = 0;
     static String profit = "5+7";
     //remove later
     public static void main(String args[]) throws IOException
@@ -121,4 +122,30 @@ public class Input {
         Process process2 = Runtime.getRuntime().exec(cmd2);
 
     }
+    
+    public void calcNoOfVariables(){
+        
+    }
+    
+    public int getNoOfVariables(){
+        return this.numberOfVariables;
+    }
+
+    public String getProfitCalPath() {
+        return profitCalPath;
+    }
+
+    public void setProfitCalPath(String profitCalPath) {
+        this.profitCalPath = profitCalPath;
+    }
+
+    public String getConstCalPath() {
+        return constCalPath;
+    }
+
+    public void setConstCalPath(String constCalPath) {
+        this.constCalPath = constCalPath;
+    }
+    
+    
 }
