@@ -18,8 +18,8 @@ import java.util.ArrayList;
  */
 public class Input {
 
-    static String profit;
-    static ArrayList<Constraints> constraints = new ArrayList<Constraints>();
+    String profit;
+    ArrayList<Constraints> constraints = new ArrayList<Constraints>();
     String profitCalPath;
     String constCalPath;
     OutputStream stdin = null;
@@ -28,8 +28,11 @@ public class Input {
 
     //remove later
     public static void main(String args[]) throws IOException {
-        genProfitCalc();
-        genConstraintCalc();
+        //genProfitCalc();
+        Input i = new Input();
+       // i.genProfitCalc();
+        i.genConstraintCalc();
+        
     }
 
     Input() {
@@ -45,7 +48,7 @@ public class Input {
      *
      * @throws IOException
      */
-    public static void genProfitCalc() throws IOException {
+    public void genProfitCalc() throws IOException {
         String content_profit = "import java.io.*;\n"
                 + "\n"
                 + "public class ProfitCalc {\n"
@@ -96,8 +99,6 @@ public class Input {
         // compile the java file
         String[] cmd1 = {"javac", "C:\\Program Files\\Java\\jdk1.7.0_25\\bin\\ProfitCalc.java"};
         Process process1 = Runtime.getRuntime().exec(cmd1);
-
-
     }
 
     /**
@@ -105,7 +106,7 @@ public class Input {
      *
      * @throws IOException
      */
-    public static void genConstraintCalc() throws IOException {
+    public void genConstraintCalc() throws IOException {
 
         int size = constraints.size();
         /**
@@ -128,16 +129,13 @@ public class Input {
                 + "    \n"
                 + "    public static void main(String[] args) {\n"
                 + "        System.out.println(\"Hi..in the constraints file\");\n"
-                + "		double[] constArr = new double[" + size + "];\n"
-                + "        for(int i=0; i<" + size + "; i++)\n"
-                + "        {";
+                + "        double[] constArr = new double[" + size + "];\n"
+                ;
 
         for (int i = 0; i < size; i++) {
             contentConstraints = contentConstraints.concat("\nconstArr[" + i + "]=" + constraints.get(i).getConst_LHS() + ";\n");
         }
-        contentConstraints = contentConstraints.concat("}\n"
-                + "    \n"
-                + "}");
+        contentConstraints = contentConstraints.concat("}\n");
 
         File file = new File("C:\\Program Files\\RuntimeTest\\ConstraintCalc.java");
 
@@ -151,8 +149,8 @@ public class Input {
         bw.write(contentConstraints);
         bw.close();
 
-        String[] cmd2 = {"javac", "C:\\Program Files\\Java\\jdk1.7.0_25\\bin\\ConstraintCalc.java"};
-        Process process2 = Runtime.getRuntime().exec(cmd2);
+       /* String[] cmd2 = {"javac", "C:\\Program Files\\Java\\jdk1.7.0_25\\bin\\ConstraintCalc.java"};
+//        Process process2 = Runtime.getRuntime().exec(cmd2);*/
 
     }
 
@@ -162,7 +160,13 @@ public class Input {
     public void computeProfit(ArrayList<Double> bagpipeVal) throws IOException {
         String[] cmd = {"java",
             "-classpath",
-            "C:\\Program Files\\RuntimeTest\\ProfitCalc"};
+            "C:\\Program Files\\RuntimeTest\\ProfitCalc",bagpipeVal.get(0).toString(),
+            bagpipeVal.get(1).toString(),bagpipeVal.get(2).toString(),
+            bagpipeVal.get(3).toString(),bagpipeVal.get(4).toString(),
+            bagpipeVal.get(5).toString(),bagpipeVal.get(6).toString(),
+            bagpipeVal.get(7).toString(),bagpipeVal.get(8).toString(),
+            bagpipeVal.get(9).toString()
+        };
         Process process = Runtime.getRuntime().exec(cmd);
 
         stdin = process.getOutputStream();
@@ -179,11 +183,18 @@ public class Input {
     {
         String[] cmd = {"java",
             "-classpath",
-            "C:\\Program Files\\RuntimeTest\\ConstraintCalc"};
+            "C:\\Program Files\\RuntimeTest\\ConstraintCalc",bagpipeVal.get(0).toString(),
+            bagpipeVal.get(1).toString(),bagpipeVal.get(2).toString(),
+            bagpipeVal.get(3).toString(),bagpipeVal.get(4).toString(),
+            bagpipeVal.get(5).toString(),bagpipeVal.get(6).toString(),
+            bagpipeVal.get(7).toString(),bagpipeVal.get(8).toString(),
+            bagpipeVal.get(9).toString()
+        };
         Process process = Runtime.getRuntime().exec(cmd);
         
         stdin = process.getOutputStream();
         stderr = process.getErrorStream();
         stdout = process.getInputStream();
+        
     }
 }
