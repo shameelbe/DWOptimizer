@@ -18,7 +18,6 @@ import java.util.ArrayList;
  */
 public class Input {
 
-
     String profit;
     ArrayList<Constraints> constraints = new ArrayList<Constraints>();
     String profitCalPath;
@@ -26,16 +25,16 @@ public class Input {
     OutputStream stdin = null;
     InputStream stderr = null;
     InputStream stdout = null;
-
     int numberOfVariables = 0;
-    static String profit = "5+7";
+//    static String profit = "5+7";
     //remove later
+
     public static void main(String args[]) throws IOException {
         //genProfitCalc();
         Input i = new Input();
-       // i.genProfitCalc();
+        // i.genProfitCalc();
         i.genConstraintCalc();
-        
+
     }
 
     Input() {
@@ -123,22 +122,49 @@ public class Input {
         c1.setConst_LHS("Math.sqrt(36)");
         constraints.add(c);
         constraints.add(c1);
-        
+
         // Testing end
 
-        String contentConstraints = "import java.io.*;\n"
+        String contentConstraints = "import java.util.ArrayList;\n"
+                + "import java.util.Arrays;\n"
                 + "\n"
                 + "public class ConstraintCalc {\n"
+                + "\n"
                 + "    \n"
                 + "    public static void main(String[] args) {\n"
+                + "        \n"
                 + "        System.out.println(\"Hi..in the constraints file\");\n"
+                + "        ArrayList<Double> bagpipeVals = new ArrayList<>();\n"
+                + "       \n"
+                + "        for (int i = 0; i < 10; i++) {\n"
+                + "            bagpipeVals.add(Double.parseDouble(args[i]));\n"
+                + "        }\n"
+                + "        \n"
+                + "        checkConstraints(bagpipeVals);\n"
+                + "    }\n"
+                + "\n"
+                + "    public static void checkConstraints(ArrayList<Double> bagpipeVals)\n"
+                + "    {\n"
+                + "        double x1,x2,x3,x4,x5,x6,x7,x8,x9,x10;\n"
+                + "        x1 = bagpipeVals.get(0);\n"
+                + "        x2 = bagpipeVals.get(1);\n"
+                + "        x3 = bagpipeVals.get(2);\n"
+                + "        x4 = bagpipeVals.get(3);\n"
+                + "        x5 = bagpipeVals.get(4);\n"
+                + "        x6 = bagpipeVals.get(5);\n"
+                + "        x7 = bagpipeVals.get(6);\n"
+                + "        x8 = bagpipeVals.get(7);\n"
+                + "        x9 = bagpipeVals.get(8);\n"
+                + "        x10 = bagpipeVals.get(9);\n"
                 + "        double[] constArr = new double[" + size + "];\n"
-                ;
+                + "        double[] penalty = new double[" + size + "];";
 
         for (int i = 0; i < size; i++) {
-            contentConstraints = contentConstraints.concat("\nconstArr[" + i + "]=" + constraints.get(i).getConst_LHS() + ";\n");
+            contentConstraints = contentConstraints.concat("\n      constArr[" + i + "]=" + constraints.get(i).getConst_LHS() + ";");
+            //contentConstraints = contentConstraints.concat("\nif (constArr[" + i + "]" + constraints.get(i).getConst_sign() +constraints.get(i).getConst_RHS() + ")\n {penalty["+i+"] = ("+constraints.get(i).getPenalty()+")*Math.abs("+constraints.get(i).getConst_RHS()+"-constArr["+size+"]);\n}");
         }
-        contentConstraints = contentConstraints.concat("}\n");
+        contentConstraints = contentConstraints.concat("\n      System.out.println(Arrays.toString(penalty));");
+        contentConstraints = contentConstraints.concat("}\n}");
 
         File file = new File("C:\\Program Files\\RuntimeTest\\ConstraintCalc.java");
 
@@ -152,8 +178,8 @@ public class Input {
         bw.write(contentConstraints);
         bw.close();
 
-       /* String[] cmd2 = {"javac", "C:\\Program Files\\Java\\jdk1.7.0_25\\bin\\ConstraintCalc.java"};
-//        Process process2 = Runtime.getRuntime().exec(cmd2);*/
+        /* String[] cmd2 = {"javac", "C:\\Program Files\\Java\\jdk1.7.0_25\\bin\\ConstraintCalc.java"};
+         /       Process process2 = Runtime.getRuntime().exec(cmd2);*/
 
     }
 
@@ -163,11 +189,11 @@ public class Input {
     public void computeProfit(ArrayList<Double> bagpipeVal) throws IOException {
         String[] cmd = {"java",
             "-classpath",
-            "C:\\Program Files\\RuntimeTest\\ProfitCalc",bagpipeVal.get(0).toString(),
-            bagpipeVal.get(1).toString(),bagpipeVal.get(2).toString(),
-            bagpipeVal.get(3).toString(),bagpipeVal.get(4).toString(),
-            bagpipeVal.get(5).toString(),bagpipeVal.get(6).toString(),
-            bagpipeVal.get(7).toString(),bagpipeVal.get(8).toString(),
+            "C:\\Program Files\\RuntimeTest\\ProfitCalc", bagpipeVal.get(0).toString(),
+            bagpipeVal.get(1).toString(), bagpipeVal.get(2).toString(),
+            bagpipeVal.get(3).toString(), bagpipeVal.get(4).toString(),
+            bagpipeVal.get(5).toString(), bagpipeVal.get(6).toString(),
+            bagpipeVal.get(7).toString(), bagpipeVal.get(8).toString(),
             bagpipeVal.get(9).toString()
         };
         Process process = Runtime.getRuntime().exec(cmd);
@@ -175,37 +201,35 @@ public class Input {
         stdin = process.getOutputStream();
         stderr = process.getErrorStream();
         stdout = process.getInputStream();
-        
+
         String profit = stdin.toString();
     }
-    
+
     /**
      * This method calculates the total penalty that applies on a schedule
      */
-    public void computePenalty(ArrayList<Double> bagpipeVal) throws IOException
-    {
+    public void computePenalty(ArrayList<Double> bagpipeVal) throws IOException {
         String[] cmd = {"java",
             "-classpath",
-            "C:\\Program Files\\RuntimeTest\\ConstraintCalc",bagpipeVal.get(0).toString(),
-            bagpipeVal.get(1).toString(),bagpipeVal.get(2).toString(),
-            bagpipeVal.get(3).toString(),bagpipeVal.get(4).toString(),
-            bagpipeVal.get(5).toString(),bagpipeVal.get(6).toString(),
-            bagpipeVal.get(7).toString(),bagpipeVal.get(8).toString(),
+            "C:\\Program Files\\RuntimeTest\\ConstraintCalc", bagpipeVal.get(0).toString(),
+            bagpipeVal.get(1).toString(), bagpipeVal.get(2).toString(),
+            bagpipeVal.get(3).toString(), bagpipeVal.get(4).toString(),
+            bagpipeVal.get(5).toString(), bagpipeVal.get(6).toString(),
+            bagpipeVal.get(7).toString(), bagpipeVal.get(8).toString(),
             bagpipeVal.get(9).toString()
         };
         Process process = Runtime.getRuntime().exec(cmd);
-        
+
         stdin = process.getOutputStream();
         stderr = process.getErrorStream();
         stdout = process.getInputStream();
-        
+
     }
-    
-    public void calcNoOfVariables(){
-        
+
+    public void calcNoOfVariables() {
     }
-    
-    public int getNoOfVariables(){
+
+    public int getNoOfVariables() {
         return this.numberOfVariables;
     }
 
@@ -224,6 +248,4 @@ public class Input {
     public void setConstCalPath(String constCalPath) {
         this.constCalPath = constCalPath;
     }
-    
-    
 }

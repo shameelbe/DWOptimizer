@@ -66,6 +66,15 @@ public class Constraints {
     public void setConst_RHS(String const_RHS) {
         this.const_RHS = const_RHS;
     }
+
+    public String getConst_sign() {
+        return const_sign;
+    }
+
+    public void setConst_sign(String const_sign) {
+        this.const_sign = const_sign;
+    }
+    
     
     
     /**
