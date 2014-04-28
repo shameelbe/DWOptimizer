@@ -17,7 +17,9 @@ public class Scheduler {
     public int[] createSchedule(Input input){
         int[] schedule = new int[10];
         
-        Population pop = new Population(input);
+        Population pop = new Population(input.getNoOfVariables());
+        
+        
         return schedule;
     }
 }

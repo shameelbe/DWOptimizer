@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package optimizer;
 
 import java.io.BufferedWriter;
@@ -26,9 +22,9 @@ public class Input {
     InputStream stderr = null;
     InputStream stdout = null;
     int numberOfVariables = 0;
-//    static String profit = "5+7";
+    //static String profit = "5+7";
+    
     //remove later
-
     public static void main(String args[]) throws IOException {
         //genProfitCalc();
         Input i = new Input();
@@ -122,7 +118,6 @@ public class Input {
         c1.setConst_LHS("Math.sqrt(36)");
         constraints.add(c);
         constraints.add(c1);
-
         // Testing end
 
         String contentConstraints = "import java.util.ArrayList;\n"
@@ -167,7 +162,6 @@ public class Input {
         contentConstraints = contentConstraints.concat("}\n}");
 
         File file = new File("C:\\Program Files\\RuntimeTest\\ConstraintCalc.java");
-
         // if file doesnt exists, then create it
         if (!file.exists()) {
             file.createNewFile();
@@ -178,8 +172,8 @@ public class Input {
         bw.write(contentConstraints);
         bw.close();
 
-        /* String[] cmd2 = {"javac", "C:\\Program Files\\Java\\jdk1.7.0_25\\bin\\ConstraintCalc.java"};
-         /       Process process2 = Runtime.getRuntime().exec(cmd2);*/
+        String[] cmd2 = {"javac", "C:\\Program Files\\Java\\jdk1.7.0_25\\bin\\ConstraintCalc.java"};
+        Process process2 = Runtime.getRuntime().exec(cmd2);
 
     }
 
@@ -202,7 +196,7 @@ public class Input {
         stderr = process.getErrorStream();
         stdout = process.getInputStream();
 
-        String profit = stdin.toString();
+        String profit1 = stdin.toString();
     }
 
     /**

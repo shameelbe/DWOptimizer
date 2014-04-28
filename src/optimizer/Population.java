@@ -15,27 +15,23 @@ public class Population {
     Member[] members;    
     int maxGenerations;
     int crossover;
-    String profitEnv;
-    String constraintEnv;
     
-    Population(Input input){
+    Population(int number){
         this.members = new Member[10];
         this.generationNo = 0;        
-        this.profitEnv = input.getProfitCalPath();
-        this.constraintEnv = input.getConstCalPath();
         for(int i =0; i < 10; i++){
-            members[i] = new Member(input.getNoOfVariables());            
+            members[i] = new Member(number);            
         }       
     }
     
     public void nextGeneration(){
-        calculatePopulationFitness();        
+                
         
     }
     
-    private void calculatePopulationFitness(){
+    private void calculatePopulationFitness(Input input){
         for(int i =0; i < 10; i++){
-            members[i].calculateFitness();
+            members[i].calculateFitness(input);
         }        
     }
     
