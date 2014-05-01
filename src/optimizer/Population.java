@@ -16,11 +16,11 @@ public class Population {
     int maxGenerations;
     int crossover;
     
-    Population(int number){
+    Population(int numberOfVars){
         this.members = new Member[10];
         this.generationNo = 0;        
         for(int i =0; i < 10; i++){
-            members[i] = new Member(number);            
+            members[i] = new Member(numberOfVars);            
         }       
     }
     

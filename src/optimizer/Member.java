@@ -18,11 +18,11 @@ public class Member implements Comparable<Member>{
     
     /**
      * Creates members with random genes for the initial population
-     *  @param geneLength length of genes of Member being created.
+     *  @param numOfVars number of variables inputted by the user.
      */
-    Member(int geneLength){
-        this.geneLength = geneLength;
-        this.decimalValue = new int[this.geneLength/4];
+    Member(int numOfVars){
+        this.geneLength = geneLength*16;
+        this.decimalValue = new int[numOfVars];
         this.genes = createRandomString();
     }
     
@@ -36,6 +36,7 @@ public class Member implements Comparable<Member>{
         geneLength = genes.length();
         
     }
+    
     
     private String createRandomString(){
         Random r = new Random();
@@ -67,7 +68,7 @@ public class Member implements Comparable<Member>{
     /**
      * Calculates the fitness of the Member.
      */
-    public void calculateFitness(){
+    public void calculateFitness(Input input){
         
     }
         

@@ -18,8 +18,7 @@ public class Scheduler {
         int[] schedule = new int[10];
         
         Population pop = new Population(input.getNoOfVariables());
-        
-        
+               
         return schedule;
     }
 }
