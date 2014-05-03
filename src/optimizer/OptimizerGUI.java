@@ -22,6 +22,9 @@ public class OptimizerGUI extends javax.swing.JDialog {
     /**
      * Creates new form Proj_Mockup
      */
+    public OptimizerGUI() {
+        
+    }
     public OptimizerGUI(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -94,7 +97,12 @@ public class OptimizerGUI extends javax.swing.JDialog {
 
         PenaltyLabel.setText("Penalty");
 
-        ResourceType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Wood", "Labor", "Metal" }));
+        ResourceType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Resource1", "Resource2","Resource3","Resource4","Resource6","Resource7","Resource8","Resource9","Resource10"}));
+        ResourceType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ResourceTypeActionPerformed(evt);
+            }
+        });
 
         Constraint.setText("Enter Constraint Function");
         Constraint.addActionListener(new java.awt.event.ActionListener() {
@@ -137,17 +145,17 @@ public class OptimizerGUI extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ResourceType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ResourceLabel))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(ConstraintsLabel)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(Constraint, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE))))
+                                .addComponent(ResourceLabel)
+                                .addGap(0, 37, Short.MAX_VALUE))
+                            .addComponent(ResourceType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ConstraintsLabel)
+                            .addComponent(Constraint, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -252,6 +260,7 @@ public class OptimizerGUI extends javax.swing.JDialog {
 
     private void DisplayScheduleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DisplayScheduleActionPerformed
         // TODO add your handling code here:
+        //Pass the Constraints to INPUT class
         DisplayArea.setText("schedule is x1= x2= x3= x4= x5= x6= x7= x8= x9= x10= ");
         //DisplayArea.setText("");// We need to get schedule outputs and print them here  
         
@@ -282,17 +291,23 @@ public class OptimizerGUI extends javax.swing.JDialog {
         d.remove(jList1.getSelectedIndex());
         count--;
         //Test Part
-        System.out.println(getConstraint());
-        System.out.println(getPenalty());
-        System.out.println(getProfitFunction());
-        System.out.println(DisplayArea.getText());
+        
+        
                 
     }//GEN-LAST:event_RemoveButtonActionPerformed
 
     private void ViewPastSchedulesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewPastSchedulesActionPerformed
         // TODO add your handling code here:
-         DisplayArea.setText("");// We need to get past schedule and print them out here
+        System.out.println(getConstraint());
+        System.out.println(getPenalty());
+        System.out.println(getProfitFunction());
+        System.out.println(DisplayArea.getText()); 
+        DisplayArea.setText("");// We need to get past schedule and print them out here
     }//GEN-LAST:event_ViewPastSchedulesActionPerformed
+
+    private void ResourceTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResourceTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ResourceTypeActionPerformed
 
     public ArrayList<String> getConstraint() {
         return constraint;
