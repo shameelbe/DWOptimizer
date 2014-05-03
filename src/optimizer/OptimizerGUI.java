@@ -1,5 +1,9 @@
 package optimizer;
 
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.JTextField;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -7,10 +11,14 @@ package optimizer;
 
 /**
  *
- * @author Shameel
+ * @author Shameel&Samuel
  */
 public class OptimizerGUI extends javax.swing.JDialog {
-
+    int count=0;
+    DefaultListModel d=new DefaultListModel();  //DefaultListModel to control the JList
+    private ArrayList<String> constraint=new ArrayList<String>(); //store contraints 
+    private ArrayList<String> penalty=new ArrayList<String>(); // store penalty
+    
     /**
      * Creates new form Proj_Mockup
      */
@@ -30,23 +38,23 @@ public class OptimizerGUI extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        ProfitFunction = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        ResourceLabel = new javax.swing.JLabel();
+        ConstraintsLabel = new javax.swing.JLabel();
+        PenaltyLabel = new javax.swing.JLabel();
+        ResourceType = new javax.swing.JComboBox();
+        Constraint = new javax.swing.JTextField();
+        Penalty = new javax.swing.JTextField();
+        AddButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
-        jButton4 = new javax.swing.JButton();
+        RemoveButton = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        DisplaySchedule = new javax.swing.JButton();
+        ViewPastSchedules = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        DisplayArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -55,7 +63,7 @@ public class OptimizerGUI extends javax.swing.JDialog {
 
         jLabel1.setText("Enter the Profit Function");
 
-        jTextField1.setText("Input Profit Function");
+        ProfitFunction.setText("Input Profit Function");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -65,7 +73,7 @@ public class OptimizerGUI extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE)
+                .addComponent(ProfitFunction, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -73,44 +81,54 @@ public class OptimizerGUI extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ProfitFunction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 20, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "RESOURCES AND CONSTRAINTS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(255, 51, 51)));
         jPanel2.setToolTipText("");
 
-        jLabel2.setText("Resource");
+        ResourceLabel.setText("Resource");
 
-        jLabel3.setText("Constraint");
+        ConstraintsLabel.setText("Constraint");
 
-        jLabel4.setText("Penalty");
+        PenaltyLabel.setText("Penalty");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Wood", "Labor", "Metal" }));
+        ResourceType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Wood", "Labor", "Metal" }));
 
-        jTextField2.setText("Enter Constraint Function");
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        Constraint.setText("Enter Constraint Function");
+        Constraint.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                ConstraintActionPerformed(evt);
             }
         });
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        Penalty.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                PenaltyActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Add");
+        AddButton.setText("Add");
+        AddButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddButtonActionPerformed(evt);
+            }
+        });
 
         jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = {};
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
         jScrollPane1.setViewportView(jList1);
 
-        jButton4.setText("Remove");
+        RemoveButton.setText("Remove");
+        RemoveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RemoveButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -122,57 +140,62 @@ public class OptimizerGUI extends javax.swing.JDialog {
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
+                            .addComponent(ResourceType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ResourceLabel))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
+                                .addComponent(ConstraintsLabel)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE))))
+                            .addComponent(Constraint, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Penalty, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1))
-                    .addComponent(jLabel4)
-                    .addComponent(jButton4)))
+                        .addComponent(AddButton))
+                    .addComponent(PenaltyLabel)
+                    .addComponent(RemoveButton)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
+                    .addComponent(ResourceLabel)
+                    .addComponent(ConstraintsLabel)
+                    .addComponent(PenaltyLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(ResourceType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Constraint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Penalty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AddButton))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4))
+                    .addComponent(RemoveButton))
                 .addGap(0, 25, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jButton2.setText("Display Production Schedule");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        DisplaySchedule.setText("Display Production Schedule");
+        DisplaySchedule.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                DisplayScheduleActionPerformed(evt);
             }
         });
 
-        jButton3.setText("View Past Schedules");
+        ViewPastSchedules.setText("View Past Schedules");
+        ViewPastSchedules.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ViewPastSchedulesActionPerformed(evt);
+            }
+        });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        DisplayArea.setColumns(20);
+        DisplayArea.setRows(5);
+        jScrollPane2.setViewportView(DisplayArea);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -181,8 +204,8 @@ public class OptimizerGUI extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(DisplaySchedule)
+                    .addComponent(ViewPastSchedules))
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -194,9 +217,9 @@ public class OptimizerGUI extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(DisplaySchedule)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3)))
+                        .addComponent(ViewPastSchedules)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -223,20 +246,79 @@ public class OptimizerGUI extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void PenaltyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PenaltyActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_PenaltyActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void DisplayScheduleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DisplayScheduleActionPerformed
         // TODO add your handling code here:
-        System.out.println("Hello");
-    }//GEN-LAST:event_jButton2ActionPerformed
+        DisplayArea.setText("schedule is x1= x2= x3= x4= x5= x6= x7= x8= x9= x10= ");
+        //DisplayArea.setText("");// We need to get schedule outputs and print them here  
+        
+    }//GEN-LAST:event_DisplayScheduleActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void ConstraintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConstraintActionPerformed
         // TODO add your handling code here:
         
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_ConstraintActionPerformed
 
+    private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
+        //Add contraints to jList1
+        String[] strings = new String[3];
+        strings[0] = (String)ResourceType.getSelectedItem();
+        strings[1] = Constraint.getText();
+        constraint.add(strings[1]);
+        strings[2] = Penalty.getText();
+        penalty.add(strings[2]);
+        d.add(count,"Constraint Function of "+strings[0]+" : "+strings[1]+" And Penalty = "+strings[2]);
+        jList1.setModel(d);
+        count++;
+    }//GEN-LAST:event_AddButtonActionPerformed
+
+    private void RemoveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveButtonActionPerformed
+        // Remove selected contraints
+        constraint.remove(jList1.getSelectedIndex());
+        penalty.remove(jList1.getSelectedIndex());
+        d.remove(jList1.getSelectedIndex());
+        count--;
+        //Test Part
+        System.out.println(getConstraint());
+        System.out.println(getPenalty());
+        System.out.println(getProfitFunction());
+        System.out.println(DisplayArea.getText());
+                
+    }//GEN-LAST:event_RemoveButtonActionPerformed
+
+    private void ViewPastSchedulesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewPastSchedulesActionPerformed
+        // TODO add your handling code here:
+         DisplayArea.setText("");// We need to get past schedule and print them out here
+    }//GEN-LAST:event_ViewPastSchedulesActionPerformed
+
+    public ArrayList<String> getConstraint() {
+        return constraint;
+    }
+
+    public void setConstraint(ArrayList<String> constraint) {
+        this.constraint = constraint;
+    }
+
+    public String getProfitFunction() {
+        return ProfitFunction.getText();
+    }
+
+    public void setProfitFunction(JTextField ProfitFunction) {
+        this.ProfitFunction = ProfitFunction;
+    }
+
+    public ArrayList<String> getPenalty() {
+        return penalty;
+    }
+
+    public void setPenalty(ArrayList<String> penalty) {
+        this.penalty = penalty;
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -279,24 +361,24 @@ public class OptimizerGUI extends javax.swing.JDialog {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JButton AddButton;
+    private javax.swing.JTextField Constraint;
+    private javax.swing.JLabel ConstraintsLabel;
+    private javax.swing.JTextArea DisplayArea;
+    private javax.swing.JButton DisplaySchedule;
+    private javax.swing.JTextField Penalty;
+    private javax.swing.JLabel PenaltyLabel;
+    private javax.swing.JTextField ProfitFunction;
+    private javax.swing.JButton RemoveButton;
+    private javax.swing.JLabel ResourceLabel;
+    private javax.swing.JComboBox ResourceType;
+    private javax.swing.JButton ViewPastSchedules;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JList jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }
