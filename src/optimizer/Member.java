@@ -20,8 +20,8 @@ public class Member implements Comparable<Member>{
      * Creates members with random genes for the initial population
      *  @param numOfVars number of variables inputted by the user.
      */
-    Member(int numOfVars){
-        this.geneLength = geneLength*16;
+    Member(int numOfVars){        
+        this.geneLength = numOfVars*16;      
         this.decimalValue = new int[numOfVars];
         this.genes = createRandomString();
     }
@@ -39,7 +39,7 @@ public class Member implements Comparable<Member>{
     
     
     private String createRandomString(){
-        Random r = new Random();
+        Random r = new Random();        
         String tempGene = "0";
         for(int i = 0; i < this.geneLength - 1; i++){
             if(r.nextBoolean()){               
@@ -48,8 +48,8 @@ public class Member implements Comparable<Member>{
             else{                
                 tempGene = tempGene.concat("0");
             }
-        }
-        return tempGene;
+        }       
+        return tempGene;        
     }
     
     /**
@@ -113,14 +113,14 @@ public class Member implements Comparable<Member>{
         this.decimalValue = decimalValue;
     }
 
-    /**   
+      
     public static void main(String[] args){
-        Member m = new Member(64);
+        Member m = new Member(4);
         System.out.println(m.genes);
         m.computeDecimalValue();
         for(int i = 0; i < 4; i++){
             System.out.println(m.decimalValue[i]);
         } 
     }
-    **/
+    
 }
