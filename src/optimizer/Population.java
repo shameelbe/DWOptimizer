@@ -4,7 +4,8 @@
  */
 package optimizer;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 
 /**
  *
@@ -12,30 +13,52 @@ import java.util.ArrayList;
  */
 public class Population {
     int generationNo;
-    Member[] members;    
+    int noOfMembers;
+    Member[] members;   
+    Member[] children;
     int maxGenerations;
     int crossover;
     
     Population(int numberOfVars){
+        this.noOfMembers = 10; //hard coding initial population to 10
         this.members = new Member[10];
         this.generationNo = 0;        
-        for(int i =0; i < 10; i++){
-            members[i] = new Member(numberOfVars);            
+        for(int i =0; i < this.noOfMembers; i++){
+            members[i] = new Member(numberOfVars);   
+            children[i] = new Member(numberOfVars);
         }       
-    }
+    }          
     
-    public void nextGeneration(){
-                
-        
+    public void nextGeneration(){        
+        //2 members having highest fitness from the initial population will be retained. 2 members from the children will be rejected
+        for(int i=2;i < this.noOfMembers - 2; i++){
+            members[i] = children[i-2];              
+        }
+        Arrays.sort(members);
+        Arrays.sort(children);
     }
     
     private void calculatePopulationFitness(Input input){
         for(int i =0; i < 10; i++){
             members[i].calculateFitness(input);
+            children[i].calculateFitness(input);
         }        
     }
     
-    public void reproduce(){
-        
-    }       
+    public void reproduce(){ 
+        Random r = new Random(); 
+        Arrays.sort(members);                       
+        for(int i = 0; i < 5; i++){
+            crossover = r.nextInt(members[i].getGeneLength()-1);
+            children[2*i].genes = members[2*i].genes.substring(crossover);
+            children[2*i + 1].genes = members[2*i + 1].genes.substring(crossover);
+            
+            children[2*i].genes = children[2*i].genes.concat(members[2*i].genes.substring(0, crossover-1));
+            children[2*i + 1].genes = children[2*i + 1].genes.concat(members[2*i + 1].genes.substring(0, crossover-1));
+        }
+    }
+
+    public int[] topMemberDecimalValues() {
+        return members[0].getDecimalValue();
+    }        
 }

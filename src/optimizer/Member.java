@@ -15,7 +15,7 @@ public class Member implements Comparable<Member>{
     String genes;
     private double fitness;
     private int[] decimalValue;
-    
+      
     /**
      * Creates members with random genes for the initial population
      *  @param numOfVars number of variables inputted by the user.
