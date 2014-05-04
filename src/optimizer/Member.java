@@ -74,6 +74,7 @@ public class Member implements Comparable<Member>{
     public void calculateFitness(Input input) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         //ArrayList<Double> list = (ArrayList) Arrays.asList(decimalValue);
         fitness = input.returnProfit(decimalValue) - input.genConstraintCalc(decimalValue);
+        System.out.println("Fitness "+fitness);
         
     }
         
