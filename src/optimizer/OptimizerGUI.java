@@ -1,6 +1,9 @@
 package optimizer;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JTextField;
 
@@ -18,6 +21,7 @@ public class OptimizerGUI extends javax.swing.JDialog {
     DefaultListModel d=new DefaultListModel();  //DefaultListModel to control the JList
     private ArrayList<String> constraint=new ArrayList<String>(); //store contraints 
     private ArrayList<String> penalty=new ArrayList<String>(); // store penalty
+    private int i;
     
     /**
      * Creates new form Proj_Mockup
@@ -261,8 +265,29 @@ public class OptimizerGUI extends javax.swing.JDialog {
     private void DisplayScheduleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DisplayScheduleActionPerformed
         // TODO add your handling code here:
         //Pass the Constraints to INPUT class
-        DisplayArea.setText("schedule is x1= x2= x3= x4= x5= x6= x7= x8= x9= x10= ");
-        //DisplayArea.setText("");// We need to get schedule outputs and print them here  
+        
+        Input Start = new Input();
+        Start.setProfit(ProfitFunction.getText());
+        try {
+            double k =  Start.genProfitCalc();
+            DisplayArea.setText( " "+k );
+            //DisplayArea.setText("");// We need to get schedule outputs and print them here  
+            //
+        //   Input Start = new Input();
+        //   try {
+          //      Start.setValueof();
+        //    } catch (Exception ex) {
+          // }
+           // }
+        } catch (IOException ex) {
+            Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_DisplayScheduleActionPerformed
 
@@ -296,13 +321,16 @@ public class OptimizerGUI extends javax.swing.JDialog {
                 
     }//GEN-LAST:event_RemoveButtonActionPerformed
 
+    @SuppressWarnings("empty-statement")
     private void ViewPastSchedulesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewPastSchedulesActionPerformed
         // TODO add your handling code here:
+        //TEST
+        int j=constraint.size();
         System.out.println(getConstraint());
         System.out.println(getPenalty());
         System.out.println(getProfitFunction());
         System.out.println(DisplayArea.getText()); 
-        DisplayArea.setText("");// We need to get past schedule and print them out here
+        DisplayArea.setText("Past Schedule");// We need to get past schedule and print them out here
     }//GEN-LAST:event_ViewPastSchedulesActionPerformed
 
     private void ResourceTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResourceTypeActionPerformed
