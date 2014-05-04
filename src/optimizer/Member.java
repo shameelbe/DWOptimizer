@@ -17,7 +17,7 @@ public class Member implements Comparable<Member>{
     private int geneLength;
     String genes;
     private double fitness;
-    private int[] decimalValue;
+    private double[] decimalValue;
       
     /**
      * Creates members with random genes for the initial population
@@ -25,7 +25,7 @@ public class Member implements Comparable<Member>{
      */
     Member(int numOfVars){        
         this.geneLength = numOfVars*16;      
-        this.decimalValue = new int[numOfVars];
+        this.decimalValue = new double[numOfVars];
         this.genes = createRandomString();
     }
     
@@ -64,7 +64,7 @@ public class Member implements Comparable<Member>{
               String sub = genes.substring(i*16, (i+1)*16);
               System.out.println(sub);
               System.out.println(Integer.parseInt(sub, 2));
-              decimalValue[i] = Integer.parseInt(sub, 2);
+              decimalValue[i] = (double)Integer.parseInt(sub, 2);
           }        
     } 
     
@@ -110,15 +110,10 @@ public class Member implements Comparable<Member>{
         this.fitness = fitness;
     }
 
-    public int[] getDecimalValue() {
+    public double[] getDecimalValue() {
         return decimalValue;
     }
-
-    public void setDecimalValue(int[] decimalValue) {
-        this.decimalValue = decimalValue;
-    }
-
-      
+    
     public static void main(String[] args){
         Member m = new Member(4);
         System.out.println(m.genes);

@@ -19,7 +19,7 @@ public class Scheduler {
     }
     
 
-    public double[] createSchedule(Input input){
+    public double[] createSchedule(Input input) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         double[] schedule = new double[input.getNoOfVariables()];
         
         Population pop = new Population(input.getNoOfVariables());

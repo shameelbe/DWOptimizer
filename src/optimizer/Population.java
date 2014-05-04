@@ -59,7 +59,7 @@ public class Population {
         }
     }
 
-    public int[] topMemberDecimalValues() {
+    public double[] topMemberDecimalValues() {
         return members[0].getDecimalValue();
     }        
 }
