@@ -346,7 +346,9 @@ public class OptimizerGUI extends javax.swing.JDialog {
         con.setConstraint(strings[1]);
         con.setResource_name(strings[0]);
         con.setPenalty((int) Double.parseDouble(strings[2]));
+        con.split();
         cList.add(con);
+        
         
         d.add(count,"Constraint Function of "+strings[0]+" : "+strings[1]+" And Penalty = "+strings[2]);
         jList1.setModel(d);

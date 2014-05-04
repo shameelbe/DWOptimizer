@@ -58,7 +58,7 @@ public class Member implements Comparable<Member>{
     /**
      * Computes the decimal values for the genes
      */
-    private void computeDecimalValue(){
+    public void computeDecimalValue(){
         int decNo = this.geneLength/16;         
         for(int i = 0; i < decNo; i++){
               String sub = genes.substring(i*16, (i+1)*16);
@@ -72,8 +72,8 @@ public class Member implements Comparable<Member>{
      * Calculates the fitness of the Member.
      */
     public void calculateFitness(Input input) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException{
-        ArrayList<Double> list = (ArrayList) Arrays.asList(decimalValue);
-        fitness = input.returnProfit(list) - input.genConstraintCalc(list);
+        //ArrayList<Double> list = (ArrayList) Arrays.asList(decimalValue);
+        fitness = input.returnProfit(decimalValue) - input.genConstraintCalc(decimalValue);
         
     }
         

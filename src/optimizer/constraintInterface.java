@@ -11,5 +11,5 @@ import java.util.ArrayList;
  * @author Shameel
  */
 public interface constraintInterface {
-    public double checkConstraints(ArrayList<Double> bagpipeVals);
+    public double checkConstraints(double[] bagpipeVals);
 }

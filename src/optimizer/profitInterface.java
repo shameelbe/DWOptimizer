@@ -11,5 +11,5 @@ import java.util.ArrayList;
  * @author Shameel
  */
 public interface profitInterface {
-    public double computeProfit(ArrayList<Double> bagpipeVals);
+    public double computeProfit(double[] bagpipeVals);
 }
