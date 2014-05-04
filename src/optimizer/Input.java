@@ -78,9 +78,9 @@ public void genProfitCalc() throws IOException, ClassNotFoundException, Instanti
                 + "public class ProfitCalc implements profitInterface {\n"
                 + "    \n"
                 + "	\n"
-                + "	public double computeProfit(ArrayList<Double> bagpipeVals)\n"
+                + "	public double computeProfit(double[] bagpipeVals)\n"
                 + "    {\n"
-                + "        Double [] x = bagpipeVals.toArray(new Double[bagpipeVals.size()]); \n"
+                + "        double [] x = bagpipeVals; \n"
                 + "        double profit = " + profit + ";\n"
                 + "        return profit;\n"
                 + "    }\n"
@@ -102,7 +102,7 @@ public void genProfitCalc() throws IOException, ClassNotFoundException, Instanti
         //return pFunction.computeProfit(list);
     }
 
- public double returnProfit(ArrayList<Double> bagpipeVals)
+ public double returnProfit(double[] bagpipeVals)
  {
      return pFunction.computeProfit(bagpipeVals);
  }
@@ -118,7 +118,7 @@ public void genProfitCalc() throws IOException, ClassNotFoundException, Instanti
      *
      * @throws IOException
      */
-    public double genConstraintCalc(ArrayList<Double> bagpipeVals) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public double genConstraintCalc(double[] bagpipeVals) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 	int size = constraints.size();
 	double pTotal=0.0;
 	JavaSourceCompiler javaSourceCompiler = new JavaSourceCompilerImpl();
@@ -127,6 +127,7 @@ public void genProfitCalc() throws IOException, ClassNotFoundException, Instanti
 	{
 	Constraints con = constraints.get(i);
 	double pValue = 0.0;
+        System.out.println(con.getConst_LHS());
 	String contentConstraints = "package optimizer;\n"
                 +"import java.io.*;\n"
                 + "\n"
@@ -134,9 +135,9 @@ public void genProfitCalc() throws IOException, ClassNotFoundException, Instanti
                 + "  import java.util.ArrayList;  \n"
                 + "public class ConstraintCalc implements constraintInterface {\n"
                 + "\n"
-                + "    public double checkConstraints(ArrayList<Double> bagpipeVals)\n"
+                + "    public double checkConstraints(double[] bagpipeVals)\n"
                 + "    {\n"
-		+ "        Double [] x = bagpipeVals.toArray(new Double[bagpipeVals.size()]); \n"
+		+ "        double [] x = bagpipeVals; \n"
 		+ "	   double p_temp = "+con.getConst_LHS()+";\n"
                 + "        return p_temp;			\n"
                 + "      			\n"
