@@ -60,7 +60,7 @@ public class Input {
      *
      * @throws IOException
      */
-public double genProfitCalc() throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+public void genProfitCalc() throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         
         javaSourceCompiler = new JavaSourceCompilerImpl();
 	compilationUnit = javaSourceCompiler.createCompilationUnit();	
@@ -86,13 +86,17 @@ public double genProfitCalc() throws IOException, ClassNotFoundException, Instan
         ClassLoader classLoader = javaSourceCompiler.compile(compilationUnit);
         Class pClass = classLoader.loadClass("optimizer.ProfitCalc");
         pFunction = (profitInterface)pClass.newInstance();
-        ArrayList<Double> list = new ArrayList<Double>();
-        list.add(2.0);
-        list.add(3.0);
-        list.add(4.0);
-        return pFunction.computeProfit(list);
+        //ArrayList<Double> list = new ArrayList<Double>();
+        //list.add(2.0);
+        //list.add(3.0);
+        //list.add(4.0);
+        //return pFunction.computeProfit(list);
     }
 
+ public double returnProfit(ArrayList<Double> bagpipeVals)
+ {
+     return pFunction.computeProfit(bagpipeVals);
+ }
     /**
      * This method creates and compiles the constraint calculator
      *
