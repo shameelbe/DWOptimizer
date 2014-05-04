@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import org.abstractmeta.toolbox.compilation.compiler.JavaSourceCompiler;
+import org.abstractmeta.toolbox.compilation.compiler.impl.JavaSourceCompilerImpl;
 
 /**
  *
@@ -23,6 +25,10 @@ public class Input {
     InputStream stdout = null;
     int numberOfVariables = 0;
     //static String profit = "5+7";
+    JavaSourceCompiler.CompilationUnit compilationUnit;
+    JavaSourceCompiler javaSourceCompiler;
+    String content_profit;
+    profitInterface pFunction;
     
     //remove later
     public static void main(String args[]) throws IOException {
@@ -34,6 +40,8 @@ public class Input {
     }
 
     Input() {
+        javaSourceCompiler = new JavaSourceCompilerImpl();
+        compilationUnit = javaSourceCompiler.createCompilationUnit();
     }
 
     Input(String profit, ArrayList<Constraints> constraints) {
@@ -46,57 +54,29 @@ public class Input {
      *
      * @throws IOException
      */
-    public void genProfitCalc() throws IOException {
-        String content_profit = "import java.io.*;\n"
+public void genProfitCalc() throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        javaSourceCompiler = new JavaSourceCompilerImpl();
+	compilationUnit = javaSourceCompiler.createCompilationUnit();	
+	content_profit = "import java.io.*;\n"
                 + "\n"
-                + "public class ProfitCalc {\n"
+		+ "import   java.lang.Math.*;\n"
+                + "public class ProfitCalc implements profit {\n"
                 + "    \n"
-                + "    public static void main(String[] args) {\n"
-                + "        System.out.println(\"Hello World\");\n"
-                + "            ArrayList<Double> bagpipeVals = new ArrayList<>();\n"
-                + "              \n"
-                + "            for(int i=0;i<10;i++){\n"
-                + "				bagpipeVals.add(Double.parseDouble(args[i]));\n"
-                + "				}\n"
-                + "                computeProfit(bagpipeVals);\n"
-                + "    }\n"
                 + "    \n"
                 + "	\n"
-                + "	public static void computeProfit(ArrayList<Double> bagpipeVals)\n"
+                + "	public double computeProfit(ArrayList<Double> bagpipeVals)\n"
                 + "    {\n"
-                + "        double x1,x2,x3,x4,x5,x6,x7,x8,x9,x10;\n"
-                + "        x1 = bagpipeVals.get(0);\n"
-                + "        x2 = bagpipeVals.get(1);\n"
-                + "        x3 = bagpipeVals.get(2);\n"
-                + "        x4 = bagpipeVals.get(3);\n"
-                + "        x5 = bagpipeVals.get(4);\n"
-                + "        x6 = bagpipeVals.get(5);\n"
-                + "        x7 = bagpipeVals.get(6);\n"
-                + "        x8 = bagpipeVals.get(7);\n"
-                + "        x9 = bagpipeVals.get(8);\n"
-                + "        x10 = bagpipeVals.get(9);\n"
-                + "        profit =" + profit + ";\n"
-                + "        System.out.println(\"profit = \"+profit);\n"
+                + "        double [] x = bagpipeVals.toArray(new String[bagpipeVals.size()]); \n"
+                + "        double profit = " + profit + ";\n"
+                + "        return profit;\n"
                 + "    }\n"
                 + "        \n"
                 + "}";
 
-        File file = new File("C:\\Program Files\\RuntimeTest\\ProfitCalc.java");
-
-        // if file doesnt exists, then create it
-        file.createNewFile();
-        System.out.println("File created");
-        System.out.println(file.getCanonicalPath());
-
-        //write the contents to the file
-        FileWriter fw = new FileWriter(file.getAbsoluteFile());
-        BufferedWriter bw = new BufferedWriter(fw);
-        bw.write(content_profit);
-        bw.close();
-
-        // compile the java file
-        String[] cmd1 = {"javac", "C:\\Program Files\\Java\\jdk1.7.0_25\\bin\\ProfitCalc.java"};
-        Process process1 = Runtime.getRuntime().exec(cmd1);
+        compilationUnit.addJavaSource("optimizer.ProfitCalc", content_profit);
+        ClassLoader classLoader = javaSourceCompiler.compile(compilationUnit);
+        Class pClass = classLoader.loadClass("optimizer.ProfitCalc");
+        pFunction = (profitInterface)pClass.newInstance();
     }
 
     /**
