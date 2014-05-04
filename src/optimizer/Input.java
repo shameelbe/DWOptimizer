@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class Input {
 
-    String profit;
+    String profit="x1+x4x7";
     ArrayList<Constraints> constraints = new ArrayList<Constraints>();
     String profitCalPath;
     String constCalPath;
@@ -30,6 +30,7 @@ public class Input {
         Input i = new Input();
         // i.genProfitCalc();
         i.genConstraintCalc();
+        boolean flag=i.validateInput();System.out.print(flag);
 
     }
 
@@ -112,10 +113,10 @@ public class Input {
          */
         size = 2;
         Constraints c = new Constraints();
-        c.setConst_LHS("5+7");
+        c.setConstraint("x1>5");
 
         Constraints c1 = new Constraints();
-        c1.setConst_LHS("Math.sqrt(36)");
+        c1.setConstraint("x8=7");
         constraints.add(c);
         constraints.add(c1);
         // Testing end
@@ -155,7 +156,11 @@ public class Input {
                 + "        double[] penalty = new double[" + size + "];";
 
         for (int i = 0; i < size; i++) {
-            contentConstraints = contentConstraints.concat("\n      constArr[" + i + "]=" + constraints.get(i).getConst_LHS() + ";");
+            contentConstraints = contentConstraints.concat("\nif(constraint.get("+i+").getConstraint())\n" +
+"        {\n" +
+"            penalty["+i+"]=Math.abs(constraint.get("+i+").getConst_RHS()-constraint.get("+i+").getConst_LHS());\n" +
+"        }");
+            //contentConstraints = contentConstraints.concat("\n      constArr[" + i + "]=" + constraints.get(i).getConst_LHS() + ";");
             //contentConstraints = contentConstraints.concat("\nif (constArr[" + i + "]" + constraints.get(i).getConst_sign() +constraints.get(i).getConst_RHS() + ")\n {penalty["+i+"] = ("+constraints.get(i).getPenalty()+")*Math.abs("+constraints.get(i).getConst_RHS()+"-constArr["+size+"]);\n}");
         }
         contentConstraints = contentConstraints.concat("\n      System.out.println(Arrays.toString(penalty));");
@@ -218,6 +223,49 @@ public class Input {
         stderr = process.getErrorStream();
         stdout = process.getInputStream();
 
+    }
+    
+    /**
+     * This method checks that every variable present in the profit function has at least one constraint defined on it
+     */
+    public boolean validateInput()
+    {
+        ArrayList<String> inputVars = new ArrayList<String>();
+        int i=0;
+        boolean flag = false ;
+        //for(int j=0; j<numberOfVariables; j++)
+        while(i!=profit.length()-1)
+        {
+            
+        i = profit.indexOf("x",i);
+        if(i>=0){
+        inputVars.add("x"+profit.charAt(i+1));}
+        i++;
+        }
+        
+        for (String s:inputVars)
+        {
+            flag = false;
+            for(Constraints s1:constraints)
+            {
+                String cons = s1.getConstraint();
+                if(cons.contains(s))
+                {
+                    flag= true;
+                    
+                }
+            }
+            
+            if(flag==false)
+            {
+                System.out.println("Not even one constraint present on "+s);
+                System.out.println("Inputs not validated..");
+                return false;
+            }
+            
+        }
+        System.out.println("Inputs validated.");
+        return true;
     }
 
     public void calcNoOfVariables() {
