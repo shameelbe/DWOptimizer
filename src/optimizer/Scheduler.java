@@ -13,6 +13,12 @@ import java.io.IOException;
 public class Scheduler {    
     
     int noOfGeneration;
+    double finalProfit;
+
+    public double getFinalProfit() {
+        return finalProfit;
+    }
+    
     
     Scheduler(){
         this.noOfGeneration = 100; // hardcoding 
@@ -29,6 +35,7 @@ public class Scheduler {
             pop.nextGeneration();        
         }       
         schedule = pop.topMemberDecimalValues();
+        finalProfit=pop.topMemberProfit();
         return schedule;
     }
 }
