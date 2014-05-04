@@ -271,7 +271,6 @@ public class OptimizerGUI extends javax.swing.JDialog {
         Start.setProfit(ProfitFunction.getText());
         try {
             Start.genProfitCalc();
-            
             //try {
                 //Start.genProfitCalc();
                 //ArrayList<Double> list = new ArrayList<Double>();
@@ -309,14 +308,18 @@ public class OptimizerGUI extends javax.swing.JDialog {
         
         Start.setConstraints(cList);
 
-        ArrayList<Double> list = new ArrayList<Double>();
+        
         //get from scheduler
         Scheduler sch = new Scheduler();
+        double[] list = null;
+        String result = " ";
+        //get from scheduler
+        
         try {
-            for(int j=0; j<=sch.createSchedule(Start).length;j++){
-            list.add(sch.createSchedule(Start)[j]);
-               }
-            DisplayArea.setText(list.toString());
+            list = sch.createSchedule(Start);
+            for(int l=0;l<list.length;l++){
+             result = result +" "+ list[l];
+            }
         } catch (IOException ex) {
             Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -326,6 +329,8 @@ public class OptimizerGUI extends javax.swing.JDialog {
         } catch (IllegalAccessException ex) {
             Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        DisplayArea.setText(result);
         
     }//GEN-LAST:event_DisplayScheduleActionPerformed
 
