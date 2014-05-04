@@ -104,6 +104,7 @@ public void genProfitCalc() throws IOException, ClassNotFoundException, Instanti
 
  public double returnProfit(double[] bagpipeVals)
  {
+     System.out.println(pFunction.computeProfit(bagpipeVals));
      return pFunction.computeProfit(bagpipeVals);
  }
     /**
@@ -138,7 +139,11 @@ public void genProfitCalc() throws IOException, ClassNotFoundException, Instanti
                 + "    public double checkConstraints(double[] bagpipeVals)\n"
                 + "    {\n"
 		+ "        double [] x = bagpipeVals; \n"
-		+ "	   double p_temp = "+con.getConst_LHS()+";\n"
+                + "        double p_temp=0; \n"
+		+ "        if(("+con.getConstraint()+")) \n"
+                + "	   p_temp = 0;\n"
+                + "	   else \n"
+                + "	   p_temp = "+con.getConst_LHS()+";\n"
                 + "        return p_temp;			\n"
                 + "      			\n"
 		+ "  				\n"
@@ -150,15 +155,27 @@ public void genProfitCalc() throws IOException, ClassNotFoundException, Instanti
     	Class cClass = classLoader.loadClass("optimizer.ConstraintCalc");
     	constraintInterface t = (constraintInterface)cClass.newInstance();
 	double lhs= t.checkConstraints(bagpipeVals) ;
-	double rhs = Double.parseDouble(con.getConst_RHS());
-	double difference= rhs-lhs;
+        double rhs;
+        double difference;
+	if(lhs==0)
+        {
+                        difference=0;
+        }
+        else
+        {
+               rhs = Double.parseDouble(con.getConst_RHS());
+               difference= rhs-lhs;
+        }
 	if(difference<0)
-	   difference = -1 * difference;
-
-	pValue = difference * con.getPenalty();
+        {
+            difference = -1 * difference;
+        }
+            pValue = difference * con.getPenalty();
+        
 	pTotal= pTotal + pValue;
 	}
-	return pTotal;
+	System.out.println(pTotal);
+        return pTotal;
 	}
   
 
