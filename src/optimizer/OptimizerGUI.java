@@ -329,7 +329,8 @@ public class OptimizerGUI extends javax.swing.JDialog {
         } catch (IllegalAccessException ex) {
             Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        String finalProfit = " Profit:"+sch.getFinalProfit();
+        result = result + finalProfit;
         DisplayArea.setText(result);
         
     }//GEN-LAST:event_DisplayScheduleActionPerformed
