@@ -41,7 +41,7 @@ public class Input {
         //genProfitCalc();
         Input i = new Input();
         // i.genProfitCalc();
-        i.genConstraintCalc();
+        //i.genConstraintCalc();
 
     }
 
@@ -53,6 +53,7 @@ public class Input {
     Input(String profit, ArrayList<Constraints> constraints) {
         this.profit = profit;
         this.constraints = constraints;
+        
     }
 
     /**
@@ -86,6 +87,10 @@ public void genProfitCalc() throws IOException, ClassNotFoundException, Instanti
         ClassLoader classLoader = javaSourceCompiler.compile(compilationUnit);
         Class pClass = classLoader.loadClass("optimizer.ProfitCalc");
         pFunction = (profitInterface)pClass.newInstance();
+        
+
+        
+        
         //ArrayList<Double> list = new ArrayList<Double>();
         //list.add(2.0);
         //list.add(3.0);
@@ -102,78 +107,55 @@ public void genProfitCalc() throws IOException, ClassNotFoundException, Instanti
      *
      * @throws IOException
      */
-    public void genConstraintCalc() throws IOException {
 
-        int size = constraints.size();
-        /**
-         * Test code
-         */
-        size = 2;
-        Constraints c = new Constraints();
-        c.setConst_LHS("5+7");
 
-        Constraints c1 = new Constraints();
-        c1.setConst_LHS("Math.sqrt(36)");
-        constraints.add(c);
-        constraints.add(c1);
-        // Testing end
-
-        String contentConstraints = "import java.util.ArrayList;\n"
-                + "import java.util.Arrays;\n"
+ /**
+     * This method creates and compiles the constraint calculator
+     *
+     * @throws IOException
+     */
+    public double genConstraintCalc(ArrayList<Double> bagpipeVals) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+	int size = constraints.size();
+	double pTotal=0.0;
+	JavaSourceCompiler javaSourceCompiler = new JavaSourceCompilerImpl();
+        JavaSourceCompiler.CompilationUnit compilationUnit = javaSourceCompiler.createCompilationUnit();
+    	for(int i=0; i<size; i++)
+	{
+	Constraints con = constraints.get(i);
+	double pValue = 0.0;
+	String contentConstraints = "package optimizer;\n"
+                +"import java.io.*;\n"
                 + "\n"
-                + "public class ConstraintCalc {\n"
+		+ "import  java.lang.Math.*;\n"
+                + "  import java.util.ArrayList;  \n"
+                + "public class ConstraintCalc implements constraintInterface {\n"
                 + "\n"
-                + "    \n"
-                + "    public static void main(String[] args) {\n"
-                + "        \n"
-                + "        System.out.println(\"Hi..in the constraints file\");\n"
-                + "        ArrayList<Double> bagpipeVals = new ArrayList<>();\n"
-                + "       \n"
-                + "        for (int i = 0; i < 10; i++) {\n"
-                + "            bagpipeVals.add(Double.parseDouble(args[i]));\n"
-                + "        }\n"
-                + "        \n"
-                + "        checkConstraints(bagpipeVals);\n"
-                + "    }\n"
-                + "\n"
-                + "    public static void checkConstraints(ArrayList<Double> bagpipeVals)\n"
+                + "    public double checkConstraints(ArrayList<Double> bagpipeVals)\n"
                 + "    {\n"
-                + "        double x1,x2,x3,x4,x5,x6,x7,x8,x9,x10;\n"
-                + "        x1 = bagpipeVals.get(0);\n"
-                + "        x2 = bagpipeVals.get(1);\n"
-                + "        x3 = bagpipeVals.get(2);\n"
-                + "        x4 = bagpipeVals.get(3);\n"
-                + "        x5 = bagpipeVals.get(4);\n"
-                + "        x6 = bagpipeVals.get(5);\n"
-                + "        x7 = bagpipeVals.get(6);\n"
-                + "        x8 = bagpipeVals.get(7);\n"
-                + "        x9 = bagpipeVals.get(8);\n"
-                + "        x10 = bagpipeVals.get(9);\n"
-                + "        double[] constArr = new double[" + size + "];\n"
-                + "        double[] penalty = new double[" + size + "];";
+		+ "        Double [] x = bagpipeVals.toArray(new Double[bagpipeVals.size()]); \n"
+		+ "	   double p_temp = "+con.getConst_LHS()+";\n"
+                + "        return p_temp;			\n"
+                + "      			\n"
+		+ "  				\n"
+		+ "    }\n"  
+		+ " }\n";
+	
+	compilationUnit.addJavaSource("optimizer.ConstraintCalc", contentConstraints);
+    	ClassLoader classLoader = javaSourceCompiler.compile(compilationUnit);
+    	Class cClass = classLoader.loadClass("optimizer.ConstraintCalc");
+    	constraintInterface t = (constraintInterface)cClass.newInstance();
+	double lhs= t.checkConstraints(bagpipeVals) ;
+	double rhs = Double.parseDouble(con.getConst_RHS());
+	double difference= rhs-lhs;
+	if(difference<0)
+	   difference = -1 * difference;
 
-        for (int i = 0; i < size; i++) {
-            contentConstraints = contentConstraints.concat("\n      constArr[" + i + "]=" + constraints.get(i).getConst_LHS() + ";");
-            //contentConstraints = contentConstraints.concat("\nif (constArr[" + i + "]" + constraints.get(i).getConst_sign() +constraints.get(i).getConst_RHS() + ")\n {penalty["+i+"] = ("+constraints.get(i).getPenalty()+")*Math.abs("+constraints.get(i).getConst_RHS()+"-constArr["+size+"]);\n}");
-        }
-        contentConstraints = contentConstraints.concat("\n      System.out.println(Arrays.toString(penalty));");
-        contentConstraints = contentConstraints.concat("}\n}");
-
-        File file = new File("C:\\Program Files\\RuntimeTest\\ConstraintCalc.java");
-        // if file doesnt exists, then create it
-        if (!file.exists()) {
-            file.createNewFile();
-        }
-
-        FileWriter fw = new FileWriter(file.getAbsoluteFile());
-        BufferedWriter bw = new BufferedWriter(fw);
-        bw.write(contentConstraints);
-        bw.close();
-
-        String[] cmd2 = {"javac", "C:\\Program Files\\Java\\jdk1.7.0_25\\bin\\ConstraintCalc.java"};
-        Process process2 = Runtime.getRuntime().exec(cmd2);
-
-    }
+	pValue = difference * con.getPenalty();
+	pTotal= pTotal + pValue;
+	}
+	return pTotal;
+	}
+  
 
     /**
      * This method calculates the profit for each production schedule
