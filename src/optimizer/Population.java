@@ -73,4 +73,9 @@ public class Population {
     public double[] topMemberDecimalValues() {
         return members[0].getDecimalValue();
     }        
+    
+    public double topMemberProfit()
+    {
+        return members[0].getFitness();
+    }
 }
