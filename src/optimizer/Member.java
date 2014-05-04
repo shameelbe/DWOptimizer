@@ -72,7 +72,7 @@ public class Member implements Comparable<Member>{
      * Calculates the fitness of the Member.
      */
     public void calculateFitness(Input input) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException{
-        ArrayList list = (ArrayList) Arrays.asList(decimalValue);
+        ArrayList<Double> list = (ArrayList) Arrays.asList(decimalValue);
         fitness = input.returnProfit(list) - input.genConstraintCalc(list);
         
     }
