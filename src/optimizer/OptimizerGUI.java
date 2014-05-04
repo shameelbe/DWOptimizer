@@ -312,9 +312,19 @@ public class OptimizerGUI extends javax.swing.JDialog {
         ArrayList<Double> list = new ArrayList<Double>();
         //get from scheduler
         Scheduler sch = new Scheduler();
-        for(int j=0; j<=sch.createSchedule(Start).length;j++){
-        list.add(sch.createSchedule(Start)[j]);
-           }
+        try {
+            for(int j=0; j<=sch.createSchedule(Start).length;j++){
+            list.add(sch.createSchedule(Start)[j]);
+               }
+        } catch (IOException ex) {
+            Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_DisplayScheduleActionPerformed
 

@@ -33,7 +33,7 @@ public class Input {
     OutputStream stdin = null;
     InputStream stderr = null;
     InputStream stdout = null;
-    int numberOfVariables = 0;
+    int numberOfVariables = 3; //hard coding
     //static String profit = "5+7";
     JavaSourceCompiler.CompilationUnit compilationUnit;
     JavaSourceCompiler javaSourceCompiler;
