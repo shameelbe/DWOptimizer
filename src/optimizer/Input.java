@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.List;
 import org.abstractmeta.toolbox.compilation.compiler.JavaSourceCompiler;
 import org.abstractmeta.toolbox.compilation.compiler.impl.JavaSourceCompilerImpl;
 
@@ -17,6 +18,11 @@ import org.abstractmeta.toolbox.compilation.compiler.impl.JavaSourceCompilerImpl
 public class Input {
 
     String profit;
+
+    public void setProfit(String profit) {
+        this.profit = profit;
+    }
+    
     ArrayList<Constraints> constraints = new ArrayList<Constraints>();
     String profitCalPath;
     String constCalPath;
@@ -55,6 +61,7 @@ public class Input {
      * @throws IOException
      */
 public void genProfitCalc() throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        
         javaSourceCompiler = new JavaSourceCompilerImpl();
 	compilationUnit = javaSourceCompiler.createCompilationUnit();	
 	content_profit = "import java.io.*;\n"
@@ -77,6 +84,11 @@ public void genProfitCalc() throws IOException, ClassNotFoundException, Instanti
         ClassLoader classLoader = javaSourceCompiler.compile(compilationUnit);
         Class pClass = classLoader.loadClass("optimizer.ProfitCalc");
         pFunction = (profitInterface)pClass.newInstance();
+        ArrayList<Double> list = new ArrayList<Double>();
+        list.add(2.0);
+        list.add(3.0);
+        list.add(4.0);
+        pFunction.computeProfit(list);
     }
 
     /**
