@@ -269,7 +269,12 @@ public class OptimizerGUI extends javax.swing.JDialog {
         Input Start = new Input();
         Start.setProfit(ProfitFunction.getText());
         try {
-            double k =  Start.genProfitCalc();
+            Start.genProfitCalc();
+            ArrayList<Double> list = new ArrayList<Double>();
+            list.add(2.0);
+            list.add(3.0);
+            list.add(4.0);
+            double k =  Start.returnProfit(list);
             DisplayArea.setText( " "+k );
             //DisplayArea.setText("");// We need to get schedule outputs and print them here  
             //
