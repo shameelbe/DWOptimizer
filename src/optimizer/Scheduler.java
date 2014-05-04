@@ -16,8 +16,8 @@ public class Scheduler {
         this.noOfGeneration = 100; // hardcoding 
     }
     
-    public int[] createSchedule(Input input){
-        int[] schedule = new int[input.getNoOfVariables()];
+    public double[] createSchedule(Input input){
+        double[] schedule = new double[input.getNoOfVariables()];
         
         Population pop = new Population(input.getNoOfVariables());
         for(int i = 0; i < noOfGeneration; i++){
