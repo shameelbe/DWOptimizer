@@ -60,20 +60,22 @@ public class Input {
      *
      * @throws IOException
      */
-public void genProfitCalc() throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+public double genProfitCalc() throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         
         javaSourceCompiler = new JavaSourceCompilerImpl();
 	compilationUnit = javaSourceCompiler.createCompilationUnit();	
-	content_profit = "import java.io.*;\n"
+        
+	content_profit = "package optimizer;\n"
+                +"import java.io.*;\n"
                 + "\n"
 		+ "import   java.lang.Math.*;\n"
-                + "public class ProfitCalc implements profit {\n"
-                + "    \n"
+                + "  import java.util.ArrayList;  \n"
+                + "public class ProfitCalc implements profitInterface {\n"
                 + "    \n"
                 + "	\n"
                 + "	public double computeProfit(ArrayList<Double> bagpipeVals)\n"
                 + "    {\n"
-                + "        double [] x = bagpipeVals.toArray(new String[bagpipeVals.size()]); \n"
+                + "        Double [] x = bagpipeVals.toArray(new Double[bagpipeVals.size()]); \n"
                 + "        double profit = " + profit + ";\n"
                 + "        return profit;\n"
                 + "    }\n"
@@ -88,7 +90,7 @@ public void genProfitCalc() throws IOException, ClassNotFoundException, Instanti
         list.add(2.0);
         list.add(3.0);
         list.add(4.0);
-        pFunction.computeProfit(list);
+        return pFunction.computeProfit(list);
     }
 
     /**
