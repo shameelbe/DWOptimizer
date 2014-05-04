@@ -4,6 +4,8 @@
  */
 package optimizer;
 
+import java.io.IOException;
+
 /**
  *
  * @author Adix
@@ -16,11 +18,12 @@ public class Scheduler {
         this.noOfGeneration = 100; // hardcoding 
     }
     
-    public int[] createSchedule(Input input){
+    public int[] createSchedule(Input input) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         int[] schedule = new int[input.getNoOfVariables()];
         
         Population pop = new Population(input.getNoOfVariables());
         for(int i = 0; i < noOfGeneration; i++){
+            pop.calculatePopulationFitness(input);
             pop.reproduce();
             pop.nextGeneration();        
         }       
