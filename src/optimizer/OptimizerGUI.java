@@ -316,6 +316,7 @@ public class OptimizerGUI extends javax.swing.JDialog {
             for(int j=0; j<=sch.createSchedule(Start).length;j++){
             list.add(sch.createSchedule(Start)[j]);
                }
+            DisplayArea.setText(list.toString());
         } catch (IOException ex) {
             Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -352,6 +353,8 @@ public class OptimizerGUI extends javax.swing.JDialog {
         
         d.add(count,"Constraint Function of "+strings[0]+" : "+strings[1]+" And Penalty = "+strings[2]);
         jList1.setModel(d);
+        Constraint.setText("");
+        Penalty.setText("");
         count++;
     }//GEN-LAST:event_AddButtonActionPerformed
 
