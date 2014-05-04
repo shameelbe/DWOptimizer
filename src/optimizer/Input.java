@@ -24,6 +24,10 @@ public class Input {
     }
     
     ArrayList<Constraints> constraints = new ArrayList<Constraints>();
+
+    public void setConstraints(ArrayList<Constraints> constraints) {
+        this.constraints = constraints;
+    }
     String profitCalPath;
     String constCalPath;
     OutputStream stdin = null;
