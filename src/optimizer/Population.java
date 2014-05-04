@@ -4,6 +4,7 @@
  */
 package optimizer;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -38,7 +39,7 @@ public class Population {
         Arrays.sort(children);
     }
     
-    private void calculatePopulationFitness(Input input){
+    private void calculatePopulationFitness(Input input) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         for(int i =0; i < 10; i++){
             members[i].calculateFitness(input);
             children[i].calculateFitness(input);
