@@ -350,6 +350,8 @@ public class OptimizerGUI extends javax.swing.JDialog {
         
         d.add(count,"Constraint Function of "+strings[0]+" : "+strings[1]+" And Penalty = "+strings[2]);
         jList1.setModel(d);
+        Constraint.setText("");
+        Penalty.setText("");
         count++;
     }//GEN-LAST:event_AddButtonActionPerformed
 
