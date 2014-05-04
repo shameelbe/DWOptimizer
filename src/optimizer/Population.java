@@ -39,7 +39,7 @@ public class Population {
         Arrays.sort(children);
     }
     
-    private void calculatePopulationFitness(Input input) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+    public void calculatePopulationFitness(Input input) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         for(int i =0; i < 10; i++){
             members[i].calculateFitness(input);
             children[i].calculateFitness(input);
