@@ -4,6 +4,9 @@
  */
 package optimizer;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -14,15 +17,15 @@ public class Member implements Comparable<Member>{
     private int geneLength;
     String genes;
     private double fitness;
-    private int[] decimalValue;
-    
+    private double[] decimalValue;
+      
     /**
      * Creates members with random genes for the initial population
      *  @param numOfVars number of variables inputted by the user.
      */
-    Member(int numOfVars){
-        this.geneLength = geneLength*16;
-        this.decimalValue = new int[numOfVars];
+    Member(int numOfVars){        
+        this.geneLength = numOfVars*16;      
+        this.decimalValue = new double[numOfVars];
         this.genes = createRandomString();
     }
     
@@ -30,16 +33,16 @@ public class Member implements Comparable<Member>{
      * Left 
      * @param geneLHS left hand gene obtained from crossover
      * @param geneRHS right hand gene obtained from crossover
-     */
+     
     Member(String geneLHS, String geneRHS){
         this.genes = geneLHS.concat(geneRHS);
         geneLength = genes.length();
         
     }
-    
+    */
     
     private String createRandomString(){
-        Random r = new Random();
+        Random r = new Random();        
         String tempGene = "0";
         for(int i = 0; i < this.geneLength - 1; i++){
             if(r.nextBoolean()){               
@@ -48,27 +51,30 @@ public class Member implements Comparable<Member>{
             else{                
                 tempGene = tempGene.concat("0");
             }
-        }
-        return tempGene;
+        }       
+        return tempGene;        
     }
     
     /**
      * Computes the decimal values for the genes
      */
-    private void computeDecimalValue(){
+    public void computeDecimalValue(){
         int decNo = this.geneLength/16;         
         for(int i = 0; i < decNo; i++){
               String sub = genes.substring(i*16, (i+1)*16);
               System.out.println(sub);
               System.out.println(Integer.parseInt(sub, 2));
-              decimalValue[i] = Integer.parseInt(sub, 2);
+              decimalValue[i] = (double)Integer.parseInt(sub, 2);
           }        
     } 
     
     /**
      * Calculates the fitness of the Member.
      */
-    public void calculateFitness(Input input){
+    public void calculateFitness(Input input) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+        //ArrayList<Double> list = (ArrayList) Arrays.asList(decimalValue);
+        fitness = input.returnProfit(decimalValue) - input.genConstraintCalc(decimalValue);
+        System.out.println("Fitness "+fitness);
         
     }
         
@@ -105,22 +111,17 @@ public class Member implements Comparable<Member>{
         this.fitness = fitness;
     }
 
-    public int[] getDecimalValue() {
+    public double[] getDecimalValue() {
         return decimalValue;
     }
-
-    public void setDecimalValue(int[] decimalValue) {
-        this.decimalValue = decimalValue;
-    }
-
-    /**   
+    
     public static void main(String[] args){
-        Member m = new Member(64);
+        Member m = new Member(4);
         System.out.println(m.genes);
         m.computeDecimalValue();
         for(int i = 0; i < 4; i++){
             System.out.println(m.decimalValue[i]);
         } 
     }
-    **/
+    
 }

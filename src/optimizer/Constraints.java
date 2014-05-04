@@ -82,11 +82,38 @@ public class Constraints {
      */
     public void split()
     {
-        String delims = "[= ]";
+        /*String delims = "[= ]";
         String[] tokens = constraint.split(delims);
         const_LHS=tokens[0];
         const_sign=tokens[1];
         const_RHS=tokens[2];
+        */
+        int splitLoc1=0;
+        int splitLoc2=0;
+        boolean cError= false;
+        for(int z=0;z<constraint.length();z++)
+        {
+            if(constraint.charAt(z)=='>' || constraint.charAt(z)=='<')
+            {
+                splitLoc1=z;
+                if(constraint.charAt(z+1)=='=')
+                {
+                    splitLoc2=z+2; 
+                    if(cError==false)
+                        cError=true;
+                    else
+                        cError=false;
+                }    
+                else
+                {
+                    splitLoc2=z+1;
+                    System.out.println(splitLoc2);                    
+                }
+            }
+        }
+        const_LHS = constraint.substring(0,splitLoc1 );
+        const_sign = constraint.substring(splitLoc1,splitLoc2);
+        const_RHS = constraint.substring(splitLoc2,constraint.length());
     }
     
 }

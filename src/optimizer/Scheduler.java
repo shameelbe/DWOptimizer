@@ -4,21 +4,38 @@
  */
 package optimizer;
 
+import java.io.IOException;
+
 /**
  *
  * @author Adix
  */
 public class Scheduler {    
     
-    Scheduler(){
-        
+    int noOfGeneration;
+    double finalProfit;
+
+    public double getFinalProfit() {
+        return finalProfit;
     }
     
-    public int[] createSchedule(Input input){
-        int[] schedule = new int[10];
+    
+    Scheduler(){
+        this.noOfGeneration = 100; // hardcoding 
+    }
+    
+
+    public double[] createSchedule(Input input) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+        double[] schedule = new double[input.getNoOfVariables()];
         
         Population pop = new Population(input.getNoOfVariables());
-               
+        for(int i = 0; i < noOfGeneration; i++){
+            pop.calculatePopulationFitness(input);
+            pop.reproduce();
+            pop.nextGeneration();        
+        }       
+        schedule = pop.topMemberDecimalValues();
+        finalProfit=pop.topMemberProfit();
         return schedule;
     }
 }
