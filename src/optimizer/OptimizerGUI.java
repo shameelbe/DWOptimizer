@@ -21,6 +21,7 @@ public class OptimizerGUI extends javax.swing.JDialog {
     DefaultListModel d=new DefaultListModel();  //DefaultListModel to control the JList
     private ArrayList<String> constraint=new ArrayList<String>(); //store contraints 
     private ArrayList<String> penalty=new ArrayList<String>(); // store penalty
+    private ArrayList<Constraints> cList = new ArrayList<Constraints>();
     private int i;
     
     /**
@@ -270,20 +271,32 @@ public class OptimizerGUI extends javax.swing.JDialog {
         Start.setProfit(ProfitFunction.getText());
         try {
             Start.genProfitCalc();
-            ArrayList<Double> list = new ArrayList<Double>();
-            list.add(2.0);
-            list.add(3.0);
-            list.add(4.0);
-            double k =  Start.returnProfit(list);
-            DisplayArea.setText( " "+k );
-            //DisplayArea.setText("");// We need to get schedule outputs and print them here  
-            //
-        //   Input Start = new Input();
-        //   try {
-          //      Start.setValueof();
-        //    } catch (Exception ex) {
-          // }
-           // }
+            
+            //try {
+                //Start.genProfitCalc();
+                //ArrayList<Double> list = new ArrayList<Double>();
+                //list.add(2.0);
+                //list.add(3.0);
+               // list.add(4.0);
+                //double k =  Start.returnProfit(list);
+                //DisplayArea.setText( " "+k );
+                //DisplayArea.setText("");// We need to get schedule outputs and print them here  
+                //
+            //   Input Start = new Input();
+            //   try {
+              //      Start.setValueof();
+            //    } catch (Exception ex) {
+              // }
+               // }
+            //} catch (IOException ex) {
+               // Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
+            //} catch (ClassNotFoundException ex) {
+                //Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
+            //} catch (InstantiationException ex) {
+                //Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
+            //} catch (IllegalAccessException ex) {
+               //}
+            //}
         } catch (IOException ex) {
             Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -293,6 +306,15 @@ public class OptimizerGUI extends javax.swing.JDialog {
         } catch (IllegalAccessException ex) {
             Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        Start.setConstraints(cList);
+
+        ArrayList<Double> list = new ArrayList<Double>();
+        //get from scheduler
+        Scheduler sch = new Scheduler();
+        for(int j=0; j<=sch.createSchedule(Start).length;j++){
+        list.add(sch.createSchedule(Start)[j]);
+           }
         
     }//GEN-LAST:event_DisplayScheduleActionPerformed
 
@@ -309,6 +331,13 @@ public class OptimizerGUI extends javax.swing.JDialog {
         constraint.add(strings[1]);
         strings[2] = Penalty.getText();
         penalty.add(strings[2]);
+        
+        Constraints con=new Constraints();
+        con.setConstraint(strings[1]);
+        con.setResource_name(strings[0]);
+        con.setPenalty((int) Double.parseDouble(strings[2]));
+        cList.add(con);
+        
         d.add(count,"Constraint Function of "+strings[0]+" : "+strings[1]+" And Penalty = "+strings[2]);
         jList1.setModel(d);
         count++;
@@ -321,7 +350,13 @@ public class OptimizerGUI extends javax.swing.JDialog {
         d.remove(jList1.getSelectedIndex());
         count--;
         //Test Part
-        
+        String Temp=jList1.getSelectedValue().toString();
+        int size = cList.size();
+        for(int k=0; k<size;k++)
+        {
+            if(Temp.contains((cList.get(k)).getConstraint()))
+               cList.remove(k);                
+        }
         
                 
     }//GEN-LAST:event_RemoveButtonActionPerformed
