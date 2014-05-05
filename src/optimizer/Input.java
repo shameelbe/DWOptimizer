@@ -17,16 +17,13 @@ import org.abstractmeta.toolbox.compilation.compiler.impl.JavaSourceCompilerImpl
  */
 public class Input {
 
-<<<<<<< HEAD
-    String profit="x1+x4x7";
-=======
     String profit;
 
     public void setProfit(String profit) {
         this.profit = profit;
     }
     
->>>>>>> 6c803d04980cb55b05d9572ae8dc83ca1d9326c6
+
     ArrayList<Constraints> constraints = new ArrayList<Constraints>();
 
     public void setConstraints(ArrayList<Constraints> constraints) {
@@ -43,20 +40,7 @@ public class Input {
     JavaSourceCompiler javaSourceCompiler;
     String content_profit;
     profitInterface pFunction;
-    
-    //remove later
-    public static void main(String args[]) throws IOException {
-        //genProfitCalc();
-        Input i = new Input();
-        // i.genProfitCalc();
-<<<<<<< HEAD
-        i.genConstraintCalc();
-        boolean flag=i.validateInput();System.out.print(flag);
-=======
-        //i.genConstraintCalc();
->>>>>>> 6c803d04980cb55b05d9572ae8dc83ca1d9326c6
-
-    }
+        
 
     Input() {
         javaSourceCompiler = new JavaSourceCompilerImpl();
@@ -121,29 +105,6 @@ public void genProfitCalc() throws IOException, ClassNotFoundException, Instanti
      *
      * @throws IOException
      */
-<<<<<<< HEAD
-    public void genConstraintCalc() throws IOException {
-
-        int size = constraints.size();
-        /**
-         * Test code
-         */
-        size = 2;
-        Constraints c = new Constraints();
-        c.setConstraint("x1>5");
-
-        Constraints c1 = new Constraints();
-        c1.setConstraint("x8=7");
-        constraints.add(c);
-        constraints.add(c1);
-        // Testing end
-
-        String contentConstraints = "import java.util.ArrayList;\n"
-                + "import java.util.Arrays;\n"
-                + "\n"
-                + "public class ConstraintCalc {\n"
-=======
-
 
  /**
      * This method creates and compiles the constraint calculator
@@ -162,7 +123,7 @@ public void genProfitCalc() throws IOException, ClassNotFoundException, Instanti
         System.out.println(con.getConst_LHS());
 	String contentConstraints = "package optimizer;\n"
                 +"import java.io.*;\n"
->>>>>>> 6c803d04980cb55b05d9572ae8dc83ca1d9326c6
+
                 + "\n"
 		+ "import  java.lang.Math.*;\n"
                 + "  import java.util.ArrayList;  \n"
@@ -170,29 +131,6 @@ public void genProfitCalc() throws IOException, ClassNotFoundException, Instanti
                 + "\n"
                 + "    public double checkConstraints(double[] bagpipeVals)\n"
                 + "    {\n"
-<<<<<<< HEAD
-                + "        double x1,x2,x3,x4,x5,x6,x7,x8,x9,x10;\n"
-                + "        x1 = bagpipeVals.get(0);\n"
-                + "        x2 = bagpipeVals.get(1);\n"
-                + "        x3 = bagpipeVals.get(2);\n"
-                + "        x4 = bagpipeVals.get(3);\n"
-                + "        x5 = bagpipeVals.get(4);\n"
-                + "        x6 = bagpipeVals.get(5);\n"
-                + "        x7 = bagpipeVals.get(6);\n"
-                + "        x8 = bagpipeVals.get(7);\n"
-                + "        x9 = bagpipeVals.get(8);\n"
-                + "        x10 = bagpipeVals.get(9);\n"
-                + "        double[] constArr = new double[" + size + "];\n"
-                + "        double[] penalty = new double[" + size + "];";
-
-        for (int i = 0; i < size; i++) {
-            contentConstraints = contentConstraints.concat("\nif(constraint.get("+i+").getConstraint())\n" +
-"        {\n" +
-"            penalty["+i+"]=Math.abs(constraint.get("+i+").getConst_RHS()-constraint.get("+i+").getConst_LHS());\n" +
-"        }");
-            //contentConstraints = contentConstraints.concat("\n      constArr[" + i + "]=" + constraints.get(i).getConst_LHS() + ";");
-            //contentConstraints = contentConstraints.concat("\nif (constArr[" + i + "]" + constraints.get(i).getConst_sign() +constraints.get(i).getConst_RHS() + ")\n {penalty["+i+"] = ("+constraints.get(i).getPenalty()+")*Math.abs("+constraints.get(i).getConst_RHS()+"-constArr["+size+"]);\n}");
-=======
 		+ "        double [] x = bagpipeVals; \n"
                 + "        double p_temp=0; \n"
 		+ "        if(("+con.getConstraint()+")) \n"
@@ -215,7 +153,6 @@ public void genProfitCalc() throws IOException, ClassNotFoundException, Instanti
 	if(lhs==0)
         {
                         difference=0;
->>>>>>> 6c803d04980cb55b05d9572ae8dc83ca1d9326c6
         }
         else
         {
