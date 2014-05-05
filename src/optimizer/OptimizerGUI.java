@@ -65,7 +65,6 @@ public class OptimizerGUI extends javax.swing.JDialog {
         RemoveButton = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         DisplaySchedule = new javax.swing.JButton();
-        ViewPastSchedules = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         DisplayArea = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
@@ -205,13 +204,6 @@ public class OptimizerGUI extends javax.swing.JDialog {
             }
         });
 
-        ViewPastSchedules.setText("View Past Schedules");
-        ViewPastSchedules.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ViewPastSchedulesActionPerformed(evt);
-            }
-        });
-
         DisplayArea.setColumns(20);
         DisplayArea.setRows(5);
         jScrollPane2.setViewportView(DisplayArea);
@@ -222,12 +214,10 @@ public class OptimizerGUI extends javax.swing.JDialog {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(DisplaySchedule)
-                    .addComponent(ViewPastSchedules))
+                .addComponent(DisplaySchedule)
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -235,10 +225,7 @@ public class OptimizerGUI extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(DisplaySchedule)
-                        .addGap(18, 18, 18)
-                        .addComponent(ViewPastSchedules)))
+                    .addComponent(DisplaySchedule))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -408,18 +395,6 @@ public class OptimizerGUI extends javax.swing.JDialog {
 
     }//GEN-LAST:event_RemoveButtonActionPerformed
 
-    @SuppressWarnings("empty-statement")
-    private void ViewPastSchedulesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewPastSchedulesActionPerformed
-        // TODO add your handling code here:
-        //TEST
-        int j = constraint.size();
-        System.out.println(getConstraint());
-        System.out.println(getPenalty());
-        System.out.println(getProfitFunction());
-        System.out.println(DisplayArea.getText());
-        DisplayArea.setText("Past Schedule");// We need to get past schedule and print them out here
-    }//GEN-LAST:event_ViewPastSchedulesActionPerformed
-
     private void ResourceTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResourceTypeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ResourceTypeActionPerformed
@@ -439,7 +414,7 @@ public class OptimizerGUI extends javax.swing.JDialog {
 "Sample constraint:\n" +
 "=================\n" +
 "x[0]+x[1]+x[2]<150\n" +
-"Math.logx[0]+x[1]>15\n" +
+"Math.log(x[0])+x[1]>15\n" +
 "\n" +
 "x[0],x[1],x[2],... x[9] are the three different types of bagpipes that need to be produced.\n" +
 "The program can create a schedule for a maximum of 10 different type of bagpipes.\n" +
@@ -528,7 +503,6 @@ public class OptimizerGUI extends javax.swing.JDialog {
     private javax.swing.JButton RemoveButton;
     private javax.swing.JLabel ResourceLabel;
     private javax.swing.JComboBox ResourceType;
-    private javax.swing.JButton ViewPastSchedules;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JList jList1;
