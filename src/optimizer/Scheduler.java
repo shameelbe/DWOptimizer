@@ -8,7 +8,7 @@ import java.io.IOException;
 
 /**
  *
- * @author Adix
+ * @author Aditya Padhye
  */
 public class Scheduler {    
     
@@ -21,7 +21,7 @@ public class Scheduler {
     
     
     Scheduler(){
-        this.noOfGeneration = 100; // hardcoding 
+        this.noOfGeneration = 1; // hardcoding 
     }
     
 

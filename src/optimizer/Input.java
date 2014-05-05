@@ -23,8 +23,6 @@ public class Input {
     public void setProfit(String profit) {
         this.profit = profit;
     }
-    
-
     ArrayList<Constraints> constraints = new ArrayList<Constraints>();
 
     public void setConstraints(ArrayList<Constraints> constraints) {
@@ -41,7 +39,6 @@ public class Input {
     JavaSourceCompiler javaSourceCompiler;
     String content_profit;
     profitInterface pFunction;
-        
 
     Input() {
         javaSourceCompiler = new JavaSourceCompilerImpl();
@@ -51,7 +48,7 @@ public class Input {
     Input(String profit, ArrayList<Constraints> constraints) {
         this.profit = profit;
         this.constraints = constraints;
-        
+
     }
 
     /**
@@ -59,15 +56,15 @@ public class Input {
      *
      * @throws IOException
      */
-public void genProfitCalc() throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        
+    public void genProfitCalc() throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+
         javaSourceCompiler = new JavaSourceCompilerImpl();
-	compilationUnit = javaSourceCompiler.createCompilationUnit();	
-        
-	content_profit = "package optimizer;\n"
-                +"import java.io.*;\n"
+        compilationUnit = javaSourceCompiler.createCompilationUnit();
+
+        content_profit = "package optimizer;\n"
+                + "import java.io.*;\n"
                 + "\n"
-		+ "import   java.lang.Math.*;\n"
+                + "import   java.lang.Math.*;\n"
                 + "  import java.util.ArrayList;  \n"
                 + "public class ProfitCalc implements profitInterface {\n"
                 + "    \n"
@@ -84,144 +81,127 @@ public void genProfitCalc() throws IOException, ClassNotFoundException, Instanti
         compilationUnit.addJavaSource("optimizer.ProfitCalc", content_profit);
         ClassLoader classLoader = javaSourceCompiler.compile(compilationUnit);
         Class pClass = classLoader.loadClass("optimizer.ProfitCalc");
-        pFunction = (profitInterface)pClass.newInstance();
-                             
+        pFunction = (profitInterface) pClass.newInstance();
+
     }
 
- public double returnProfit(double[] bagpipeVals)
- {
-     System.out.println(pFunction.computeProfit(bagpipeVals));
-     return pFunction.computeProfit(bagpipeVals);
- }
-  
- public boolean validateInput()
-    {
+    public double returnProfit(double[] bagpipeVals) {
+        System.out.println(pFunction.computeProfit(bagpipeVals));
+        return pFunction.computeProfit(bagpipeVals);
+    }
+
+    public boolean validateInput() {
         ArrayList<String> inputVars = new ArrayList<String>();
-        int i=0;
-        boolean flag = false ;
+        int i = 0;
+        boolean flag = false;
         //for(int j=0; j<numberOfVariables; j++)
-        System.out.println("Profit length: "+profit.length());
-        int out=0;
-        while(out<=profit.length()-1 )
-        {   
-        
-        i = profit.indexOf("x",i);
-        if(i>=0){
-        if(!inputVars.contains(profit.substring(i, i+4)))
-        {
-            inputVars.add(profit.substring(i, i+4));
-            System.out.println("i value: "+i);
-            System.out.println("Input Variable is : "+ profit.substring(i, i+4));
+        System.out.println("Profit length: " + profit.length());
+        int out = 0;
+        while (out <= profit.length() - 1) {
+
+            i = profit.indexOf("x", i);
+            if (i >= 0) {
+                if (!inputVars.contains(profit.substring(i, i + 4))) {
+                    inputVars.add(profit.substring(i, i + 4));
+                    System.out.println("i value: " + i);
+                    System.out.println("Input Variable is : " + profit.substring(i, i + 4));
+                }
+            }
+            out = i + 4;
+            i++;
+            out++;
         }
-        }
-        out = i+4;
-        i++;
-        out++;
-        }
-        
-        for (String s:inputVars)
-        {
+
+        for (String s : inputVars) {
             flag = false;
-            
-            for(Constraints s1:constraints)
-            {
+
+            for (Constraints s1 : constraints) {
                 String cons = s1.getConstraint();
                 System.out.println("s1");
                 System.out.println("cons");
-                if(cons.contains(s))
-                {
-                    flag= true;
-                    
+                if (cons.contains(s)) {
+                    flag = true;
+
                 }
             }
-            
-            if(flag==false)
-            {
-                System.out.println("Not even one constraint present on "+s);
+
+            if (flag == false) {
+                System.out.println("Not even one constraint present on " + s);
                 System.out.println("Inputs not validated..");
                 JOptionPane.showMessageDialog(null, "Constraints are not defined for all variables in Profit Function", "Error", JOptionPane.ERROR_MESSAGE);
                 return false;
             }
-            
+
         }
         System.out.println("Inputs validated.");
-        numberOfVariables=inputVars.size();
+        numberOfVariables = inputVars.size();
         System.out.println("inputVars.size()");
         return true;
     }
- 
- 
- /**
+
+    /**
      * This method creates and compiles the constraint calculator
      *
      * @throws IOException
      */
-
- /**
+    /**
      * This method creates and compiles the constraint calculator
      *
      * @throws IOException
      */
     public double genConstraintCalc(double[] bagpipeVals) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-	int size = constraints.size();
-	double pTotal=0.0;
-	JavaSourceCompiler javaSourceCompiler = new JavaSourceCompilerImpl();
+        int size = constraints.size();
+        double pTotal = 0.0;
+        JavaSourceCompiler javaSourceCompiler = new JavaSourceCompilerImpl();
         JavaSourceCompiler.CompilationUnit compilationUnit = javaSourceCompiler.createCompilationUnit();
-    	for(int i=0; i<size; i++)
-	{
-	Constraints con = constraints.get(i);
-	double pValue = 0.0;
-        System.out.println(con.getConst_LHS());
-	String contentConstraints = "package optimizer;\n"
-                +"import java.io.*;\n"
+        for (int i = 0; i < size; i++) {
+            Constraints con = constraints.get(i);
+            double pValue = 0.0;
+            System.out.println(con.getConst_LHS());
+            String contentConstraints = "package optimizer;\n"
+                    + "import java.io.*;\n"
+                    + "\n"
+                    + "import  java.lang.Math.*;\n"
+                    + "  import java.util.ArrayList;  \n"
+                    + "public class ConstraintCalc implements constraintInterface {\n"
+                    + "\n"
+                    + "    public double checkConstraints(double[] bagpipeVals)\n"
+                    + "    {\n"
+                    + "        double [] x = bagpipeVals; \n"
+                    + "        double p_temp=0; \n"
+                    + "        if((" + con.getConstraint() + ")) \n"
+                    + "	   p_temp = 0;\n"
+                    + "	   else \n"
+                    + "	   p_temp = " + con.getConst_LHS() + ";\n"
+                    + "        return p_temp;			\n"
+                    + "      			\n"
+                    + "  				\n"
+                    + "    }\n"
+                    + " }\n";
 
-                + "\n"
-		+ "import  java.lang.Math.*;\n"
-                + "  import java.util.ArrayList;  \n"
-                + "public class ConstraintCalc implements constraintInterface {\n"
-                + "\n"
-                + "    public double checkConstraints(double[] bagpipeVals)\n"
-                + "    {\n"
-		+ "        double [] x = bagpipeVals; \n"
-                + "        double p_temp=0; \n"
-		+ "        if(("+con.getConstraint()+")) \n"
-                + "	   p_temp = 0;\n"
-                + "	   else \n"
-                + "	   p_temp = "+con.getConst_LHS()+";\n"
-                + "        return p_temp;			\n"
-                + "      			\n"
-		+ "  				\n"
-		+ "    }\n"  
-		+ " }\n";
-	
-	compilationUnit.addJavaSource("optimizer.ConstraintCalc", contentConstraints);
-    	ClassLoader classLoader = javaSourceCompiler.compile(compilationUnit);
-    	Class cClass = classLoader.loadClass("optimizer.ConstraintCalc");
-    	constraintInterface t = (constraintInterface)cClass.newInstance();
-	double lhs= t.checkConstraints(bagpipeVals) ;
-        double rhs;
-        double difference;
-	if(lhs==0)
-        {
-                        difference=0;
-        }
-        else
-        {
-               rhs = Double.parseDouble(con.getConst_RHS());
-               difference= rhs-lhs;
-        }
-	if(difference<0)
-        {
-            difference = -1 * difference;
-        }
+            compilationUnit.addJavaSource("optimizer.ConstraintCalc", contentConstraints);
+            ClassLoader classLoader = javaSourceCompiler.compile(compilationUnit);
+            Class cClass = classLoader.loadClass("optimizer.ConstraintCalc");
+            constraintInterface t = (constraintInterface) cClass.newInstance();
+            double lhs = t.checkConstraints(bagpipeVals);
+            double rhs;
+            double difference;
+            if (lhs == 0) {
+                difference = 0;
+            } else {
+                rhs = Double.parseDouble(con.getConst_RHS());
+                difference = rhs - lhs;
+            }
+            if (difference < 0) {
+                difference = -1 * difference;
+            }
             pValue = difference * con.getPenalty();
-        
-	pTotal= pTotal + pValue;
-	}
-	System.out.println(pTotal);
+
+            pTotal = pTotal + pValue;
+        }
+        System.out.println(pTotal);
         return pTotal;
-	}
-  
+    }
 
     /**
      * This method calculates the profit for each production schedule
@@ -265,8 +245,7 @@ public void genProfitCalc() throws IOException, ClassNotFoundException, Instanti
         stdout = process.getInputStream();
 
     }
-    
-    
+
     public void calcNoOfVariables() {
     }
 

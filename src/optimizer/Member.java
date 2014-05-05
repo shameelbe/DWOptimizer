@@ -11,7 +11,7 @@ import java.util.Random;
 
 /**
  *
- * @author Adix
+ * @author Aditya Padhye
  */
 public class Member implements Comparable<Member>{
     private int bitSize = 10;
@@ -22,7 +22,7 @@ public class Member implements Comparable<Member>{
       
     /**
      * Creates members with random genes for the initial population
-     *  @param numOfVars number of variables inputted by the user.
+     * @param numOfVars number of variables inputted by the user.
      */
     Member(int numOfVars){        
         this.geneLength = numOfVars*bitSize;      
@@ -30,7 +30,10 @@ public class Member implements Comparable<Member>{
         this.genes = createRandomString();
     }
     
-    
+    /**
+     * 
+     * @return 
+     */
     private String createRandomString(){
         Random r = new Random();        
         String tempGene = "0";
@@ -75,8 +78,7 @@ public class Member implements Comparable<Member>{
         else return 0;
     }
     
-    //setter getter methods for the class.
-    
+    //setter getter methods for the class.    
     public int getGeneLength() {
         return geneLength;
     }
@@ -103,15 +105,6 @@ public class Member implements Comparable<Member>{
 
     public double[] getDecimalValue() {
         return decimalValue;
-    }
-    
-    public static void main(String[] args){
-        Member m = new Member(4);
-        System.out.println(m.genes);
-        m.computeDecimalValue();
-        for(int i = 0; i < 4; i++){
-            System.out.println(m.decimalValue[i]);
-        } 
-    }
+    }       
     
 }
