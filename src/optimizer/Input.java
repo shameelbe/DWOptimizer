@@ -85,15 +85,7 @@ public void genProfitCalc() throws IOException, ClassNotFoundException, Instanti
         ClassLoader classLoader = javaSourceCompiler.compile(compilationUnit);
         Class pClass = classLoader.loadClass("optimizer.ProfitCalc");
         pFunction = (profitInterface)pClass.newInstance();
-        
-
-        
-        
-        //ArrayList<Double> list = new ArrayList<Double>();
-        //list.add(2.0);
-        //list.add(3.0);
-        //list.add(4.0);
-        //return pFunction.computeProfit(list);
+                             
     }
 
  public double returnProfit(double[] bagpipeVals)
@@ -274,49 +266,7 @@ public void genProfitCalc() throws IOException, ClassNotFoundException, Instanti
 
     }
     
-    /**
-     * This method checks that every variable present in the profit function has at least one constraint defined on it
-     */
-   /* public boolean validateInput()
-    {
-        ArrayList<String> inputVars = new ArrayList<String>();
-        int i=0;
-        boolean flag = false ;
-        //for(int j=0; j<numberOfVariables; j++)
-        while(i!=profit.length()-1)
-        {
-            
-        i = profit.indexOf("x",i);
-        if(i>=0){
-        inputVars.add("x"+profit.charAt(i+1));}
-        i++;
-        }
-        
-        for (String s:inputVars)
-        {
-            flag = false;
-            for(Constraints s1:constraints)
-            {
-                String cons = s1.getConstraint();
-                if(cons.contains(s))
-                {
-                    flag= true;
-                    
-                }
-            }
-            
-            if(flag==false)
-            {
-                System.out.println("Not even one constraint present on "+s);
-                System.out.println("Inputs not validated..");
-                return false;
-            }
-            
-        }
-        System.out.println("Inputs validated.");
-        return true;
-    }
-*/
+    
     public void calcNoOfVariables() {
     }
 

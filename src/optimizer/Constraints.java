@@ -81,13 +81,7 @@ public class Constraints {
      * Splits the constraint into 3 parts
      */
     public void split()
-    {
-        /*String delims = "[= ]";
-        String[] tokens = constraint.split(delims);
-        const_LHS=tokens[0];
-        const_sign=tokens[1];
-        const_RHS=tokens[2];
-        */
+    {        
         int splitLoc1=0;
         int splitLoc2=0;
         boolean cError= false;

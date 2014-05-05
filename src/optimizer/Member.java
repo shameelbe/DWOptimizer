@@ -30,17 +30,6 @@ public class Member implements Comparable<Member>{
         this.genes = createRandomString();
     }
     
-    /**
-     * Left 
-     * @param geneLHS left hand gene obtained from crossover
-     * @param geneRHS right hand gene obtained from crossover
-     
-    Member(String geneLHS, String geneRHS){
-        this.genes = geneLHS.concat(geneRHS);
-        geneLength = genes.length();
-        
-    }
-    */
     
     private String createRandomString(){
         Random r = new Random();        

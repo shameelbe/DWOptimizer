@@ -12,30 +12,30 @@ import javax.swing.JTextField;
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Shameel&Samuel
  */
 public class OptimizerGUI extends javax.swing.JDialog {
-    int count=0;
-    DefaultListModel d=new DefaultListModel();  //DefaultListModel to control the JList
-    private ArrayList<String> constraint=new ArrayList<String>(); //store contraints 
-    private ArrayList<String> penalty=new ArrayList<String>(); // store penalty
+
+    int count = 0;
+    DefaultListModel d = new DefaultListModel();  //DefaultListModel to control the JList
+    private ArrayList<String> constraint = new ArrayList<String>(); //store contraints 
+    private ArrayList<String> penalty = new ArrayList<String>(); // store penalty
     private ArrayList<Constraints> cList = new ArrayList<Constraints>();
     private int i;
-    
+
     /**
      * Creates new form Proj_Mockup
      */
     public OptimizerGUI() {
-        
     }
+
     public OptimizerGUI(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -279,38 +279,12 @@ public class OptimizerGUI extends javax.swing.JDialog {
     }//GEN-LAST:event_PenaltyActionPerformed
 
     private void DisplayScheduleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DisplayScheduleActionPerformed
-        // TODO add your handling code here:
-        //Pass the Constraints to INPUT class
-        
+        // TODO add your handling code here:       
+
         Input Start = new Input();
         Start.setProfit(ProfitFunction.getText());
         try {
             Start.genProfitCalc();
-            //try {
-                //Start.genProfitCalc();
-                //ArrayList<Double> list = new ArrayList<Double>();
-                //list.add(2.0);
-                //list.add(3.0);
-               // list.add(4.0);
-                //double k =  Start.returnProfit(list);
-                //DisplayArea.setText( " "+k );
-                //DisplayArea.setText("");// We need to get schedule outputs and print them here  
-                //
-            //   Input Start = new Input();
-            //   try {
-              //      Start.setValueof();
-            //    } catch (Exception ex) {
-              // }
-               // }
-            //} catch (IOException ex) {
-               // Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
-            //} catch (ClassNotFoundException ex) {
-                //Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
-            //} catch (InstantiationException ex) {
-                //Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
-            //} catch (IllegalAccessException ex) {
-               //}
-            //}
         } catch (IOException ex) {
             Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -322,85 +296,73 @@ public class OptimizerGUI extends javax.swing.JDialog {
         } catch (IllegalAccessException ex) {
             JOptionPane.showMessageDialog(null, "Error in Compiling Classes runtime. Please check your JRE version", "Error", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalStateException ex) {
+            JOptionPane.showMessageDialog(null, "Invalid Input Profit Function", "Error", JOptionPane.ERROR_MESSAGE);
         }
-         catch (IllegalStateException ex)
-         {
-             JOptionPane.showMessageDialog(null, "Invalid Input Profit Function", "Error", JOptionPane.ERROR_MESSAGE);
-         }
-        
-        Start.setConstraints(cList);
-        //System.out.println("START" + cList.get(0));
-        
-        if(Start.validateInput())
-        {
-        //get from scheduler
-        Scheduler sch = new Scheduler();
-        double[] list = null;
-        String result = " ";
-        //get from scheduler
-        
-        try {
-            list = sch.createSchedule(Start);
-            for(int l=0;l<list.length;l++){
-             result = result +" "+ list[l];
+
+        Start.setConstraints(cList);        
+
+        if (Start.validateInput()) {
+            //get from scheduler
+            Scheduler sch = new Scheduler();
+            double[] list = null;
+            String result = " ";
+            //get from scheduler
+
+            try {
+                list = sch.createSchedule(Start);
+                for (int l = 0; l < list.length; l++) {
+                    result = result + " " + list[l];
+                }
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Error in Compiling Classes runtime. Please check your JRE version", "Error", JOptionPane.ERROR_MESSAGE);
+                Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                JOptionPane.showMessageDialog(null, "Error in Compiling Classes runtime. Please check your JRE version", "Error", JOptionPane.ERROR_MESSAGE);
+                Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InstantiationException ex) {
+                JOptionPane.showMessageDialog(null, "Error in Compiling Classes runtime. Please check your JRE version", "Error", JOptionPane.ERROR_MESSAGE);
+                Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                JOptionPane.showMessageDialog(null, "Error in Compiling Classes runtime. Please check your JRE version", "Error", JOptionPane.ERROR_MESSAGE);
+                Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalStateException ex) {
+                JOptionPane.showMessageDialog(null, "Invalid Input Constraint Function", "Error", JOptionPane.ERROR_MESSAGE);
+            } catch (ArrayIndexOutOfBoundsException ex) {
+                JOptionPane.showMessageDialog(null, "Error in Input Variables. Values should range from x[0] to x[9] and ordered numerically", "Error", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Error in Compiling Classes runtime. Please check your JRE version", "Error", JOptionPane.ERROR_MESSAGE);
-            Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            JOptionPane.showMessageDialog(null, "Error in Compiling Classes runtime. Please check your JRE version", "Error", JOptionPane.ERROR_MESSAGE);
-            Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            JOptionPane.showMessageDialog(null, "Error in Compiling Classes runtime. Please check your JRE version", "Error", JOptionPane.ERROR_MESSAGE);
-            Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            JOptionPane.showMessageDialog(null, "Error in Compiling Classes runtime. Please check your JRE version", "Error", JOptionPane.ERROR_MESSAGE);
-            Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-          catch (IllegalStateException ex)
-         {
-             JOptionPane.showMessageDialog(null, "Invalid Input Constraint Function", "Error", JOptionPane.ERROR_MESSAGE);
-         }
-         catch(ArrayIndexOutOfBoundsException ex)
-         {
-             JOptionPane.showMessageDialog(null, "Error in Input Variables. Values should range from x[0] to x[9] and ordered numerically", "Error", JOptionPane.ERROR_MESSAGE);
-         }
-        String finalProfit = " Profit:"+sch.getFinalProfit();
-        result = result + finalProfit;
-        DisplayArea.setText(result);
+            String finalProfit = " Profit:" + sch.getFinalProfit();
+            result = result + finalProfit;
+            DisplayArea.setText(result);
         }
     }//GEN-LAST:event_DisplayScheduleActionPerformed
 
     private void ConstraintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConstraintActionPerformed
         // TODO add your handling code here:
-        
     }//GEN-LAST:event_ConstraintActionPerformed
 
     private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
         //Add contraints to jList1
         String[] strings = new String[3];
-        strings[0] = (String)ResourceType.getSelectedItem();
+        strings[0] = (String) ResourceType.getSelectedItem();
         strings[1] = Constraint.getText();
         constraint.add(strings[1]);
         strings[2] = Penalty.getText();
         penalty.add(strings[2]);
-        
-        Constraints con=new Constraints();
+
+        Constraints con = new Constraints();
         con.setConstraint(strings[1]);
         con.setResource_name(strings[0]);
-        try
-        {
-        con.setPenalty((int) Double.parseDouble(strings[2]));
-        con.split();
-        cList.add(con);
-        d.add(count,"Constraint Function of "+strings[0]+" : "+strings[1]+" And Penalty = "+strings[2]);
-        jList1.setModel(d);
-        Constraint.setText("");
-        Penalty.setText("");
-        count++;
-        }
-        catch (NumberFormatException ex)
-        {
+        try {
+            con.setPenalty((int) Double.parseDouble(strings[2]));
+            con.split();
+            cList.add(con);
+            d.add(count, "Constraint Function of " + strings[0] + " : " + strings[1] + " And Penalty = " + strings[2]);
+            jList1.setModel(d);
+            Constraint.setText("");
+            Penalty.setText("");
+            count++;
+        } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Enter a valid number for penalty", "Error", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -408,38 +370,35 @@ public class OptimizerGUI extends javax.swing.JDialog {
 
     private void RemoveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveButtonActionPerformed
         // Remove selected contraints
-       try
-       {
-        String Temp=jList1.getSelectedValue().toString();
-        int size = cList.size();
-        for(int k=0; k<size;k++)
-        {
-            if(Temp.contains((cList.get(k)).getConstraint()))
-               cList.remove(k);                
+        try {
+            String Temp = jList1.getSelectedValue().toString();
+            int size = cList.size();
+            for (int k = 0; k < size; k++) {
+                if (Temp.contains((cList.get(k)).getConstraint())) {
+                    cList.remove(k);
+                }
+            }
+            constraint.remove(jList1.getSelectedIndex());
+            penalty.remove(jList1.getSelectedIndex());
+            d.remove(jList1.getSelectedIndex());
+            count--;
+            //Test Part
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "No Vaues to remove", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        constraint.remove(jList1.getSelectedIndex());
-        penalty.remove(jList1.getSelectedIndex());
-        d.remove(jList1.getSelectedIndex());
-        count--;
-        //Test Part
-       }
-       catch(NullPointerException ex)
-       {
-          JOptionPane.showMessageDialog(null, "No Vaues to remove", "Error", JOptionPane.ERROR_MESSAGE); 
-       }
-        
-                
+
+
     }//GEN-LAST:event_RemoveButtonActionPerformed
 
     @SuppressWarnings("empty-statement")
     private void ViewPastSchedulesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewPastSchedulesActionPerformed
         // TODO add your handling code here:
         //TEST
-        int j=constraint.size();
+        int j = constraint.size();
         System.out.println(getConstraint());
         System.out.println(getPenalty());
         System.out.println(getProfitFunction());
-        System.out.println(DisplayArea.getText()); 
+        System.out.println(DisplayArea.getText());
         DisplayArea.setText("Past Schedule");// We need to get past schedule and print them out here
     }//GEN-LAST:event_ViewPastSchedulesActionPerformed
 
@@ -449,19 +408,19 @@ public class OptimizerGUI extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "The Darwinian Production Scheduler:\n" +
-"\n" +
-"The Darwinian Scheduler uses Genetic Algorithms to compute the most optimal production schedule for the given profit function and set of resource constraints.\n" +
-"\n" +
-"Sample profit function:\n" +
-"x[0]+x[1]+x[3]\n" +
-"\n" +
-"Sample constraint:\n" +
-"x[0]+x[1]+x[3]<150\n" +
-"\n" +
-"x[0],x[1],x[2] are the three different types of bagpipes that need to be produced.\n" +
-"The program can create a schedule for a maximum of 10 different type of bagpipes.\n" +
-"There should be at least one constraint on every type of bagpipe being produced.", "Help", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "The Darwinian Production Scheduler:\n"
+                + "\n"
+                + "The Darwinian Scheduler uses Genetic Algorithms to compute the most optimal production schedule for the given profit function and set of resource constraints.\n"
+                + "\n"
+                + "Sample profit function:\n"
+                + "x[0]+x[1]+x[3]\n"
+                + "\n"
+                + "Sample constraint:\n"
+                + "x[0]+x[1]+x[3]<150\n"
+                + "\n"
+                + "x[0],x[1],x[2] are the three different types of bagpipes that need to be produced.\n"
+                + "The program can create a schedule for a maximum of 10 different type of bagpipes.\n"
+                + "There should be at least one constraint on every type of bagpipe being produced.", "Help", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public ArrayList<String> getConstraint() {
@@ -487,8 +446,7 @@ public class OptimizerGUI extends javax.swing.JDialog {
     public void setPenalty(ArrayList<String> penalty) {
         this.penalty = penalty;
     }
-    
-    
+
     /**
      * @param args the command line arguments
      */
