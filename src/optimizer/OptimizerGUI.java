@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /*
@@ -299,12 +300,19 @@ public class OptimizerGUI extends javax.swing.JDialog {
         } catch (IOException ex) {
             Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "Error in Compiling Classes runtime. Please check your JRE version", "Error", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
+            JOptionPane.showMessageDialog(null, "Error in Compiling Classes runtime. Please check your JRE version", "Error", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
+            JOptionPane.showMessageDialog(null, "Error in Compiling Classes runtime. Please check your JRE version", "Error", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
+         catch (IllegalStateException ex)
+         {
+             JOptionPane.showMessageDialog(null, "Invalid Input Profit Function", "Error", JOptionPane.ERROR_MESSAGE);
+         }
         
         Start.setConstraints(cList);
         Start.validateInput();
@@ -328,7 +336,11 @@ public class OptimizerGUI extends javax.swing.JDialog {
             Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
             Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
+         catch(ArrayIndexOutOfBoundsException ex)
+         {
+             JOptionPane.showMessageDialog(null, "Error in Input Variables. Values should range from x[0] to x[9] and ordered numerically", "Error", JOptionPane.ERROR_MESSAGE);
+         }
         String finalProfit = " Profit:"+sch.getFinalProfit();
         result = result + finalProfit;
         DisplayArea.setText(result);
