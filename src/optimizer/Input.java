@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import org.abstractmeta.toolbox.compilation.compiler.JavaSourceCompiler;
 import org.abstractmeta.toolbox.compilation.compiler.impl.JavaSourceCompilerImpl;
 
@@ -143,6 +144,7 @@ public void genProfitCalc() throws IOException, ClassNotFoundException, Instanti
             {
                 System.out.println("Not even one constraint present on "+s);
                 System.out.println("Inputs not validated..");
+                JOptionPane.showMessageDialog(null, "Constraints are not defined for all variables in Profit Function", "Error", JOptionPane.ERROR_MESSAGE);
                 return false;
             }
             
