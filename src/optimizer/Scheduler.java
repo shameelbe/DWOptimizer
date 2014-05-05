@@ -13,6 +13,10 @@ import java.io.IOException;
 public class Scheduler {    
     
     int noOfGeneration;
+
+    public void setNoOfGeneration(int noOfGeneration) {
+        this.noOfGeneration = noOfGeneration;
+    }
     double finalProfit;
 
     public double getFinalProfit() {
