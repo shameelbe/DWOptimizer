@@ -322,7 +322,7 @@ public class OptimizerGUI extends javax.swing.JDialog {
             try {
                 list = sch.createSchedule(Start);
                 for (int l = 0; l < list.length; l++) {
-                    result = result + " " + list[l];
+                    result = result + " || x["+l+"] :" + list[l];
                 }
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(null, "Error in Compiling Classes runtime. Please check your JRE version", "Error", JOptionPane.ERROR_MESSAGE);
@@ -341,7 +341,7 @@ public class OptimizerGUI extends javax.swing.JDialog {
             } catch (ArrayIndexOutOfBoundsException ex) {
                 JOptionPane.showMessageDialog(null, "Error in Input Variables. Values should range from x[0] to x[9] and ordered numerically", "Error", JOptionPane.ERROR_MESSAGE);
             }
-            String finalProfit = " Profit:" + sch.getFinalProfit();
+            String finalProfit = "\n Profit:" + sch.getFinalProfit();
             result = result + finalProfit;
             DisplayArea.setText(result);
         }
