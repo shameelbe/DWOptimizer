@@ -366,11 +366,6 @@ public class OptimizerGUI extends javax.swing.JDialog {
 
     private void RemoveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveButtonActionPerformed
         // Remove selected contraints
-        constraint.remove(jList1.getSelectedIndex());
-        penalty.remove(jList1.getSelectedIndex());
-        d.remove(jList1.getSelectedIndex());
-        count--;
-        //Test Part
         String Temp=jList1.getSelectedValue().toString();
         int size = cList.size();
         for(int k=0; k<size;k++)
@@ -378,6 +373,12 @@ public class OptimizerGUI extends javax.swing.JDialog {
             if(Temp.contains((cList.get(k)).getConstraint()))
                cList.remove(k);                
         }
+        constraint.remove(jList1.getSelectedIndex());
+        penalty.remove(jList1.getSelectedIndex());
+        d.remove(jList1.getSelectedIndex());
+        count--;
+        //Test Part
+
         
                 
     }//GEN-LAST:event_RemoveButtonActionPerformed
