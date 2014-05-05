@@ -307,7 +307,7 @@ public class OptimizerGUI extends javax.swing.JDialog {
         }
         
         Start.setConstraints(cList);
-
+        Start.validateInput();
         
         //get from scheduler
         Scheduler sch = new Scheduler();
