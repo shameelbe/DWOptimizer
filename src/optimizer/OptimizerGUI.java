@@ -309,7 +309,7 @@ public class OptimizerGUI extends javax.swing.JDialog {
             try {
                 list = sch.createSchedule(Start);
                 for (int l = 0; l < list.length; l++) {
-                    result = result + " || x["+l+"] :" + list[l];
+                    result = result + " || x[" + l + "] :" + list[l];
                 }
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(null, "Error in Compiling Classes runtime. Please check your JRE version", "Error", JOptionPane.ERROR_MESSAGE);
@@ -401,29 +401,29 @@ public class OptimizerGUI extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "The Darwinian Production Scheduler\n" +
-"================================\n" +
-"\n" +
-"The Darwinian Scheduler uses Genetic Algorithms to compute the most optimal production schedule for the given profit function and set of resource constraints.\n" +
-"\n" +
-"Sample profit function:\n" +
-"====================\n" +
-"x[0]+x[1]+x[2]\n" +
-"x[0]+x[1]+x[2]+Math.log(x[3])\n" +
-"\n" +
-"Sample constraint:\n" +
-"=================\n" +
-"x[0]+x[1]+x[2]<150\n" +
-"Math.log(x[0])+x[1]>15\n" +
-"\n" +
-"x[0],x[1],x[2],... x[9] are the three different types of bagpipes that need to be produced.\n" +
-"The program can create a schedule for a maximum of 10 different type of bagpipes.\n" +
-"There should be at least one constraint on every type of bagpipe being produced.\n" +
-"Note\n" +
-"========\n" +
-"1.) Functions should be specified in the same way as it is done in a JAVA code. Math functions in JAVA such as Math.log(),Math.sinh() and other functions can be used.\n" +
-"2.) Input variables should be of the form x[0] to x[9]. (The program will support only a maximum of 10 variables).\n" +
-"3.) Additional Check has been done to verify that all input variables are included as a part of constraints. i.e if x[0] to x[4] are used, the varibles should be present in atleast one of the constraint function.", "Help", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "The Darwinian Production Scheduler\n"
+                + "================================\n"
+                + "\n"
+                + "The Darwinian Scheduler uses Genetic Algorithms to compute the most optimal production schedule for the given profit function and set of resource constraints.\n"
+                + "\n"
+                + "Sample profit function:\n"
+                + "====================\n"
+                + "x[0]+x[1]+x[2]\n"
+                + "x[0]+x[1]+x[2]+Math.log(x[3])\n"
+                + "\n"
+                + "Sample constraint:\n"
+                + "=================\n"
+                + "x[0]+x[1]+x[2]<150\n"
+                + "Math.log(x[0])+x[1]>15\n"
+                + "\n"
+                + "x[0],x[1],x[2],... x[9] are the three different types of bagpipes that need to be produced.\n"
+                + "The program can create a schedule for a maximum of 10 different type of bagpipes.\n"
+                + "There should be at least one constraint on every type of bagpipe being produced.\n"
+                + "Note\n"
+                + "========\n"
+                + "1.) Functions should be specified in the same way as it is done in a JAVA code. Math functions in JAVA such as Math.log(),Math.sinh() and other functions can be used.\n"
+                + "2.) Input variables should be of the form x[0] to x[9]. (The program will support only a maximum of 10 variables).\n"
+                + "3.) Additional Check has been done to verify that all input variables are included as a part of constraints. i.e if x[0] to x[4] are used, the varibles should be present in atleast one of the constraint function.", "Help", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public ArrayList<String> getConstraint() {

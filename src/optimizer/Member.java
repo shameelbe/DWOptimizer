@@ -29,8 +29,8 @@ public class Member implements Comparable<Member>{
     }
     
     /**
-     * 
-     * @return 
+     * Creates a random string for the initial population    
+     * @return randomly generated string of 0's and 1's
      */
     private String createRandomString(){
         Random r = new Random();        

@@ -19,6 +19,8 @@ public class Constraints {
     private String const_RHS;
     private String const_sign;
     
+    
+    // Getter and setter methods for the constraints.
     public String getConstraint() {
         return constraint;
     }

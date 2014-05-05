@@ -21,10 +21,18 @@ public class Scheduler {
     
     
     Scheduler(){
-        this.noOfGeneration = 1; // hardcoding 
+        this.noOfGeneration = 100; // hardcoded 
     }
     
-
+    /**
+     * Runs the genetic algorithm to create a schedule
+     * @param input the input parameters
+     * @return created schedule with profit value
+     * @throws IOException
+     * @throws ClassNotFoundException
+     * @throws InstantiationException
+     * @throws IllegalAccessException 
+     */
     public double[] createSchedule(Input input) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException{
         double[] schedule = new double[input.getNoOfVariables()];
         
