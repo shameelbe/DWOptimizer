@@ -100,7 +100,61 @@ public void genProfitCalc() throws IOException, ClassNotFoundException, Instanti
      System.out.println(pFunction.computeProfit(bagpipeVals));
      return pFunction.computeProfit(bagpipeVals);
  }
-    /**
+  
+ public boolean validateInput()
+    {
+        ArrayList<String> inputVars = new ArrayList<String>();
+        int i=0;
+        boolean flag = false ;
+        //for(int j=0; j<numberOfVariables; j++)
+        System.out.println("Profit length: "+profit.length());
+        int out=0;
+        while(out<=profit.length()-1 )
+        {   
+        
+        i = profit.indexOf("x",i);
+        if(i>=0){
+        if(!inputVars.contains(profit.substring(i, i+4)))
+        {
+            inputVars.add(profit.substring(i, i+4));
+            System.out.println("i value: "+i);
+            System.out.println("Input Variable is : "+ profit.substring(i, i+4));
+        }
+        }
+        out = i+4;
+        i++;
+        out++;
+        }
+        
+        for (String s:inputVars)
+        {
+            flag = false;
+            for(Constraints s1:constraints)
+            {
+                String cons = s1.getConstraint();
+                if(cons.contains(s))
+                {
+                    flag= true;
+                    
+                }
+            }
+            
+            if(flag==false)
+            {
+                System.out.println("Not even one constraint present on "+s);
+                System.out.println("Inputs not validated..");
+                return false;
+            }
+            
+        }
+        System.out.println("Inputs validated.");
+        numberOfVariables=inputVars.size();
+        System.out.println("inputVars.size()");
+        return true;
+    }
+ 
+ 
+ /**
      * This method creates and compiles the constraint calculator
      *
      * @throws IOException
@@ -218,7 +272,7 @@ public void genProfitCalc() throws IOException, ClassNotFoundException, Instanti
     /**
      * This method checks that every variable present in the profit function has at least one constraint defined on it
      */
-    public boolean validateInput()
+   /* public boolean validateInput()
     {
         ArrayList<String> inputVars = new ArrayList<String>();
         int i=0;
@@ -257,7 +311,7 @@ public void genProfitCalc() throws IOException, ClassNotFoundException, Instanti
         System.out.println("Inputs validated.");
         return true;
     }
-
+*/
     public void calcNoOfVariables() {
     }
 
