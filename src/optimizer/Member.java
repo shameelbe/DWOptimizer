@@ -14,6 +14,7 @@ import java.util.Random;
  * @author Adix
  */
 public class Member implements Comparable<Member>{
+    private int bitSize = 10;
     private int geneLength;
     String genes;
     private double fitness;
@@ -24,7 +25,7 @@ public class Member implements Comparable<Member>{
      *  @param numOfVars number of variables inputted by the user.
      */
     Member(int numOfVars){        
-        this.geneLength = numOfVars*16;      
+        this.geneLength = numOfVars*bitSize;      
         this.decimalValue = new double[numOfVars];
         this.genes = createRandomString();
     }
@@ -59,9 +60,9 @@ public class Member implements Comparable<Member>{
      * Computes the decimal values for the genes
      */
     public void computeDecimalValue(){
-        int decNo = this.geneLength/16;         
+        int decNo = this.geneLength/bitSize;         
         for(int i = 0; i < decNo; i++){
-              String sub = genes.substring(i*16, (i+1)*16);
+              String sub = genes.substring(i*bitSize, (i+1)*bitSize);
               System.out.println(sub);
               System.out.println(Integer.parseInt(sub, 2));
               decimalValue[i] = (double)Integer.parseInt(sub, 2);
