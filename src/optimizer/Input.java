@@ -130,9 +130,12 @@ public void genProfitCalc() throws IOException, ClassNotFoundException, Instanti
         for (String s:inputVars)
         {
             flag = false;
+            
             for(Constraints s1:constraints)
             {
                 String cons = s1.getConstraint();
+                System.out.println("s1");
+                System.out.println("cons");
                 if(cons.contains(s))
                 {
                     flag= true;
