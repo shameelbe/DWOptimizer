@@ -408,6 +408,8 @@ public class OptimizerGUI extends javax.swing.JDialog {
 
     private void RemoveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveButtonActionPerformed
         // Remove selected contraints
+       try
+       {
         String Temp=jList1.getSelectedValue().toString();
         int size = cList.size();
         for(int k=0; k<size;k++)
@@ -420,7 +422,11 @@ public class OptimizerGUI extends javax.swing.JDialog {
         d.remove(jList1.getSelectedIndex());
         count--;
         //Test Part
-
+       }
+       catch(NullPointerException ex)
+       {
+          JOptionPane.showMessageDialog(null, "No Vaues to remove", "Error", JOptionPane.ERROR_MESSAGE); 
+       }
         
                 
     }//GEN-LAST:event_RemoveButtonActionPerformed
