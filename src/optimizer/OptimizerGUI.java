@@ -13,8 +13,12 @@ import javax.swing.JTextField;
  * and open the template in the editor.
  */
 /**
+ * This class is responsible for defining all the requirements pertaining to GUI
+ * and passes the input received from user to the input class. LIBRARY for JAVA
+ * code Compilation at runtime. Link :
+ * https://code.google.com/p/compilation-toolbox/downloads/list
  *
- * @author Shameel&Samuel
+ * @author Shameel and Samuel Reference : We used the free open source JAVA
  */
 public class OptimizerGUI extends javax.swing.JDialog {
 
@@ -278,6 +282,12 @@ public class OptimizerGUI extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_PenaltyActionPerformed
 
+    /**
+     * Passes the input profit function to Input Class object Adds the created
+     * the constraint object to list and passes the same to input class Creates
+     * an object of Scheduler and invoke the appropriate method to start
+     * optiizmation process
+     */
     private void DisplayScheduleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DisplayScheduleActionPerformed
         // TODO add your handling code here:       
 
@@ -300,7 +310,7 @@ public class OptimizerGUI extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Invalid Input Profit Function", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
-        Start.setConstraints(cList);        
+        Start.setConstraints(cList);
 
         if (Start.validateInput()) {
             //get from scheduler
@@ -341,8 +351,12 @@ public class OptimizerGUI extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_ConstraintActionPerformed
 
+    /**
+     * Adds the Constraint values from the constraint text box to the list and
+     * to the Input Class Object
+     */
     private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
-        //Add contraints to jList1
+
         String[] strings = new String[3];
         strings[0] = (String) ResourceType.getSelectedItem();
         strings[1] = Constraint.getText();
@@ -368,6 +382,10 @@ public class OptimizerGUI extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_AddButtonActionPerformed
 
+    /**
+     * Removes the Constraint values from the constraint text box to the list
+     * and to the Input Class Object
+     */
     private void RemoveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveButtonActionPerformed
         // Remove selected contraints
         try {
