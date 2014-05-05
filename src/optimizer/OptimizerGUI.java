@@ -329,14 +329,22 @@ public class OptimizerGUI extends javax.swing.JDialog {
              result = result +" "+ list[l];
             }
         } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Error in Compiling Classes runtime. Please check your JRE version", "Error", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "Error in Compiling Classes runtime. Please check your JRE version", "Error", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
+            JOptionPane.showMessageDialog(null, "Error in Compiling Classes runtime. Please check your JRE version", "Error", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
+            JOptionPane.showMessageDialog(null, "Error in Compiling Classes runtime. Please check your JRE version", "Error", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
         } 
+          catch (IllegalStateException ex)
+         {
+             JOptionPane.showMessageDialog(null, "Invalid Input Constraint Function", "Error", JOptionPane.ERROR_MESSAGE);
+         }
          catch(ArrayIndexOutOfBoundsException ex)
          {
              JOptionPane.showMessageDialog(null, "Error in Input Variables. Values should range from x[0] to x[9] and ordered numerically", "Error", JOptionPane.ERROR_MESSAGE);
@@ -364,16 +372,22 @@ public class OptimizerGUI extends javax.swing.JDialog {
         Constraints con=new Constraints();
         con.setConstraint(strings[1]);
         con.setResource_name(strings[0]);
+        try
+        {
         con.setPenalty((int) Double.parseDouble(strings[2]));
         con.split();
-        cList.add(con);
-        
-        
+
         d.add(count,"Constraint Function of "+strings[0]+" : "+strings[1]+" And Penalty = "+strings[2]);
         jList1.setModel(d);
         Constraint.setText("");
         Penalty.setText("");
         count++;
+        }
+        catch (NumberFormatException ex)
+        {
+            JOptionPane.showMessageDialog(null, "Enter a valid number for penalty", "Error", JOptionPane.ERROR_MESSAGE);
+            Logger.getLogger(OptimizerGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_AddButtonActionPerformed
 
     private void RemoveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveButtonActionPerformed
