@@ -315,8 +315,8 @@ public class OptimizerGUI extends javax.swing.JDialog {
          }
         
         Start.setConstraints(cList);
-        Start.validateInput();
-        
+        if(Start.validateInput())
+        {
         //get from scheduler
         Scheduler sch = new Scheduler();
         double[] list = null;
@@ -352,7 +352,7 @@ public class OptimizerGUI extends javax.swing.JDialog {
         String finalProfit = " Profit:"+sch.getFinalProfit();
         result = result + finalProfit;
         DisplayArea.setText(result);
-        
+        } 
     }//GEN-LAST:event_DisplayScheduleActionPerformed
 
     private void ConstraintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConstraintActionPerformed
